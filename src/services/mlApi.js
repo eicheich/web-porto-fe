@@ -52,35 +52,35 @@ async function parseErrorResponse(response) {
 
   if (status === 400) {
     throw new ApiError(
-      parsedDetail || 'Format file tidak didukung, base64 rusak, atau payload kosong.',
+      parsedDetail || 'Format gambar tidak didukung atau data tidak valid.',
       400,
       detail
     );
   }
   if (status === 413) {
     throw new ApiError(
-      parsedDetail || 'Ukuran payload terlalu besar (maks. file 5 MB atau base64 2 MB).',
+      parsedDetail || 'Ukuran gambar melebihi batas maksimal yang diizinkan.',
       413,
       detail
     );
   }
   if (status === 422) {
     throw new ApiError(
-      parsedDetail || 'Validasi input gagal. Periksa kembali nilai yang dimasukkan.',
+      parsedDetail || 'Data yang dimasukkan belum sesuai. Periksa kembali input Anda.',
       422,
       detail
     );
   }
   if (status >= 500) {
     throw new ApiError(
-      parsedDetail || 'Terjadi kesalahan pada server atau file model belum tersedia.',
+      'Terjadi kendala pada sistem saat memproses permintaan. Silakan coba lagi sebentar lagi.',
       status,
       detail
     );
   }
 
   throw new ApiError(
-    parsedDetail || `Request gagal dengan status HTTP ${status}.`,
+    parsedDetail || 'Permintaan tidak dapat diproses saat ini.',
     status,
     detail
   );
@@ -107,12 +107,12 @@ async function fetchWithTimeout(path, options = {}, timeoutMs = ML_TIMEOUT_MS) {
     }
     if (err?.name === 'AbortError') {
       throw new ApiError(
-        `Request timeout setelah ${Math.round(timeoutMs / 1000)} detik. Server mungkin sedang cold-start memuat model.`,
+        'Proses memakan waktu lebih lama dari biasanya. Silakan coba lagi sebentar lagi.',
         408
       );
     }
     throw new ApiError(
-      `Tidak dapat terhubung ke server API (${API_BASE_URL}). Pastikan backend FastAPI sedang berjalan.`,
+      'Layanan prediksi sedang tidak tersedia saat ini. Silakan coba lagi beberapa saat lagi.',
       0
     );
   } finally {

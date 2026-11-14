@@ -402,10 +402,10 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
             />
             <span>
               {apiStatus.state === 'online'
-                ? 'FastAPI Online'
+                ? 'Model Service Online'
                 : apiStatus.state === 'checking'
-                  ? 'Checking API...'
-                  : 'API Offline (Local)'}
+                  ? 'Checking Service...'
+                  : 'Model Service Offline'}
             </span>
             <button
               type="button"
