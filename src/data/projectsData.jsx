@@ -161,13 +161,13 @@ export const softwareProjectsData = [
     id: 'unravel',
     category: 'Web Application · Case Analysis',
     title: 'Unravel',
-    description: 'Belajar menganalisis kasus secara terstruktur lewat jalur interaktif dan diskusi.',
+    description: 'Learn structured case analysis through interactive learning paths and community discussions.',
     ctaLabel: 'View case study',
     stageBg: '#DCFCE7',
     preview: (
       <div className="w-full bg-white border border-[#111827] p-1.5 shadow-[2px_2px_0px_#808080]">
         <div className="bg-[#000080] text-white text-[8px] font-mono px-1.5 py-0.5 mb-1.5 flex justify-between">
-          <span>unravel.app</span>
+          <span>unravel-prod.vercel.app</span>
           <span>×</span>
         </div>
         <img
@@ -182,7 +182,7 @@ export const softwareProjectsData = [
     id: 'ufee',
     category: 'Mobile App · Flutter',
     title: 'UFee',
-    description: 'Aplikasi toko khusus sepatu dengan katalog editorial dan kategori All, Men, Women.',
+    description: 'Flutter sneaker store app with an editorial catalog and All, Men, Women categories.',
     ctaLabel: 'View case study',
     stageBg: '#F3F4F6',
     preview: (
@@ -199,7 +199,7 @@ export const softwareProjectsData = [
     id: 'hijaukita',
     category: 'Garuda Hacks 4.0 Winner · Flutter & Laravel',
     title: 'HijauKita',
-    description: 'Aplikasi sustainability pemenang Hackathon International Garuda Hacks 4.0 dengan fitur BuGuru AI.',
+    description: 'Sustainability app and Garuda Hacks 4.0 International Hackathon winner featuring BuGuru AI.',
     ctaLabel: 'View case study',
     stageBg: '#DCFCE7',
     preview: (
@@ -209,48 +209,6 @@ export const softwareProjectsData = [
           alt="HijauKita Flutter mobile app preview"
           className="w-full h-24 object-cover object-top"
         />
-      </div>
-    ),
-  },
-  {
-    id: 'study-space',
-    category: 'Web Application · React',
-    title: 'Study Space',
-    description: 'A simpler way to organize coursework and study plans.',
-    ctaLabel: 'View case study',
-    stageBg: '#DCFCE7',
-    preview: (
-      <div className="w-full bg-white border border-[#111827] p-2.5 shadow-[2px_2px_0px_#808080]">
-        <div className="bg-[#000080] text-white text-[8px] font-mono px-1.5 py-0.5 mb-2 flex justify-between">
-          <span>studyspace.exe</span>
-          <span>×</span>
-        </div>
-        <div className="space-y-1.5">
-          <div className="text-[9px] font-bold text-[#111827]">One thing at a time...</div>
-          <div className="h-1.5 bg-[#E5E7EB] w-3/4" />
-          <div className="h-1.5 bg-[#000080]/25 w-2/3" />
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'campus-pocket',
-    category: 'Mobile App · React Native',
-    title: 'Campus Pocket',
-    description: 'Campus events, reminders, and notes in one place.',
-    ctaLabel: 'View case study',
-    stageBg: '#FFEDD5',
-    preview: (
-      <div className="w-24 bg-white border-2 border-[#111827] p-2 shadow-[2px_2px_0px_#808080] text-center">
-        <div className="w-5 h-1 bg-[#9CA3AF] mx-auto mb-1.5" />
-        <div className="text-[7.5px] font-bold text-[#111827] mb-1 leading-tight">
-          Campus life
-        </div>
-        <div className="bg-[#000080] text-white text-[7px] font-mono py-0.5 px-1 mb-1">
-          Today's events
-        </div>
-        <div className="h-1 bg-[#E5E7EB] w-full mb-1" />
-        <div className="h-1 bg-[#E5E7EB] w-4/5 mx-auto" />
       </div>
     ),
   },

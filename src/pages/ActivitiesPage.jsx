@@ -1,67 +1,155 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, ArrowRight, Award, BookOpen, MessageSquare } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Award, Briefcase, Users, MessageSquare } from 'lucide-react';
 import { Win98WindowControls, PixelDocIcon } from '../components/RetroStickers';
 
 export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
-  const [activeFilter, setActiveFilter] = useState('all'); // 'all' | 'judging' | 'campus' | 'workshops'
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all' | 'work' | 'awards' | 'organizations'
 
   const activities = [
     {
-      id: 'judging',
-      badge: 'IT Events',
-      year: '2025 – 2026',
-      nodeBg: '#F5EDD6',
-      title: 'IT & Student Innovation Judge',
-      role: 'Judge & Prototype Reviewer',
+      id: 'tki-intern',
+      category: 'work',
+      badge: 'Work Experience',
+      year: '2023 – 2024',
+      nodeBg: '#DCEDFB',
+      title: 'Backend Developer Intern',
+      role: 'PT Teknologi Kartu Indonesia',
       summary:
-        'Evaluated student software and machine learning prototypes during IT competitions and innovation showcases.',
-      impact:
-        'Helped teams clarify who their users are, whether the solution solves the problem, and how to present it clearly.',
-      highlights: ['Prototype Evaluation', 'Usability Feedback', 'Feasibility'],
+        'Engineered and maintained scalable backend services and RESTful APIs using FastAPI and MongoDB.',
+      highlights: ['FastAPI', 'MongoDB', 'RESTful APIs', 'Backend'],
+      icon: <Briefcase size={15} className="text-[#000080]" />,
+    },
+    {
+      id: 'jombang-essay',
+      category: 'awards',
+      badge: 'Honors & Awards',
+      year: 'International',
+      nodeBg: '#F5EDD6',
+      title: 'Best International Essay',
+      role: 'International Essay Competition — 19th Dies Natalis of the Government of Jombang Regency',
+      summary:
+        'Awarded Best International Essay for delivering a structured, research-backed written analysis addressing regional and global development themes.',
+      highlights: ['Research Writing', 'Regional & Global Themes'],
       icon: <Award size={15} className="text-[#000080]" />,
     },
     {
-      id: 'campus',
-      badge: 'IPB University',
-      year: 'Ongoing',
-      nodeBg: '#DCEDFB',
-      title: 'Software Engineering Community & Team Projects',
-      role: 'Software Engineering Student',
+      id: 'prisma-2025',
+      category: 'awards',
+      badge: 'Honors & Awards',
+      year: '2025',
+      nodeBg: '#F5EDD6',
+      title: '2nd Place Winner — Web Design Competition',
+      role: 'PRISMA Festival',
       summary:
-        'Collaborating with fellow IPB University students on team-based software builds, hackathons, and campus tech initiatives.',
-      impact:
-        'Practiced dividing tasks fairly, communicating blockers early, and shipping working web and mobile projects on time.',
-      highlights: ['Agile Teamwork', 'UI/UX Collaboration', 'Problem Solving'],
+        'Designed and built a responsive, user-centric web interface focusing on modern UI/UX principles.',
+      highlights: ['Web Design', 'Responsive UI', 'UI/UX'],
+      icon: <Award size={15} className="text-[#000080]" />,
+    },
+    {
+      id: 'lks-2024',
+      category: 'awards',
+      badge: 'Honors & Awards',
+      year: '2024',
+      nodeBg: '#F5EDD6',
+      title: '2nd Place Winner — LKS (Student Competency Competition) in Web Design',
+      role: 'Kudus Regency Level',
+      summary:
+        'Competed at the regency level in full-cycle web design, layout structuring, and front-end implementation.',
+      highlights: ['Web Design', 'Layout Structuring', 'Front-End'],
+      icon: <Award size={15} className="text-[#000080]" />,
+    },
+    {
+      id: 'garuda-hacks-2023',
+      category: 'awards',
+      badge: 'Honors & Awards',
+      year: '2023',
+      nodeBg: '#F5EDD6',
+      title: 'Honorable Mention',
+      role: 'Garuda Hacks 4.0 International Hackathon',
+      summary:
+        'Collaborated in an international hackathon environment to build and pitch a functional tech prototype under tight deadlines.',
+      highlights: ['International Hackathon', 'Prototyping', 'Pitching'],
+      icon: <Award size={15} className="text-[#000080]" />,
+    },
+    {
+      id: 'it-knowledge-2025',
+      category: 'organizations',
+      badge: 'Organizations, Leadership & Events',
+      year: '2025',
+      nodeBg: '#E5EED4',
+      title: 'Treasurer & UI/UX Competition Judge',
+      role: 'IT Knowledge, IPB University',
+      summary:
+        "Managed event budgeting and financial allocations while serving on the judging panel to evaluate participants' UI/UX design submissions.",
+      highlights: ['UI/UX Judging', 'Budgeting', 'IPB University'],
       logo: '/logo-ipb.png',
     },
     {
-      id: 'workshops',
-      badge: 'Peer Learning',
-      year: '2025 – 2026',
+      id: 'medical-div-2025',
+      category: 'organizations',
+      badge: 'Organizations, Leadership & Events',
+      year: '2025',
       nodeBg: '#E5EED4',
-      title: 'Breaking Down Tech for Beginners',
-      role: 'Study Group Lead & Peer Mentor',
+      title: 'Head of Medical Division',
+      role: 'Software Engineering Study Program Orientation, IPB University',
       summary:
-        'Facilitated hands-on study sessions covering Python, machine learning basics, and modern web interfaces with React.',
-      impact:
-        'Explained complex AI and coding concepts in plain language so beginners feel confident building their own experiments.',
-      highlights: ['Public Speaking', 'Mentoring', 'Clear Communication'],
-      icon: <BookOpen size={15} className="text-[#000080]" />,
+        'Led the medical response team and coordinated health logistics to ensure participant safety throughout the orientation program.',
+      highlights: ['Leadership', 'Logistics', 'Team Coordination'],
+      logo: '/logo-ipb.png',
+    },
+    {
+      id: 'micro-it-2024',
+      category: 'organizations',
+      badge: 'Organizations, Leadership & Events',
+      year: '2024 – 2025',
+      nodeBg: '#E5EED4',
+      title: 'Division Treasurer — Software, Hardware, and Networking (SHN)',
+      role: 'MICRO IT, IPB University',
+      summary:
+        'Handled financial tracking, budgeting, and administrative reporting for the SHN technical division.',
+      highlights: ['Financial Tracking', 'SHN Division', 'MICRO IT'],
+      logo: '/logo-ipb.png',
+    },
+    {
+      id: 'gdgoc-2024',
+      category: 'organizations',
+      badge: 'Organizations, Leadership & Events',
+      year: '2024 – 2025',
+      nodeBg: '#E5EED4',
+      title: 'Active Member',
+      role: 'Google Developer Groups on Campus (GDGoC), IPB University',
+      summary:
+        'Participated in developer workshops, tech talks, and collaborative peer-learning sessions.',
+      highlights: ['GDGoC IPB', 'Workshops', 'Peer Learning'],
+      icon: <Users size={15} className="text-[#000080]" />,
+    },
+    {
+      id: 'devfest-2025',
+      category: 'organizations',
+      badge: 'Organizations, Leadership & Events',
+      year: '2025 & 2026',
+      nodeBg: '#E5EED4',
+      title: 'Participant',
+      role: 'Google Developer Festival (DevFest) Bogor',
+      summary:
+        'Attended regional developer conferences exploring cloud, web, and AI advancements; notably inspired by Data Scientist speaker Arsy Arlina during the 2025 session, sparking deeper interest in applied data science.',
+      highlights: ['DevFest Bogor', 'Cloud & AI', 'Applied Data Science'],
+      icon: <Users size={15} className="text-[#000080]" />,
     },
   ];
 
   const filters = [
     { id: 'all', label: 'All highlights' },
-    { id: 'judging', label: 'Judging & Mentoring' },
-    { id: 'campus', label: 'Campus & Community' },
-    { id: 'workshops', label: 'Workshops & Sharing' },
+    { id: 'work', label: 'Work Experience' },
+    { id: 'awards', label: 'Honors & Awards' },
+    { id: 'organizations', label: 'Organizations & Events' },
   ];
 
   const filteredActivities =
     activeFilter === 'all'
       ? activities
-      : activities.filter((item) => item.id === activeFilter);
+      : activities.filter((item) => item.category === activeFilter);
 
   return (
     <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-10 sm:pt-14 pb-20 relative">
@@ -91,14 +179,14 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
         <div className="inline-flex items-center gap-1.5 bg-[#D4D0C8] win98-raised px-2.5 py-0.5 mb-3">
           <PixelDocIcon className="w-3.5 h-3.5" />
           <span className="text-[11px] font-mono font-bold tracking-wider text-[#000080] uppercase">
-            Experience & Highlights
+            Experience &amp; Highlights
           </span>
         </div>
         <h1 className="font-display text-3xl sm:text-4xl md:text-[44px] font-bold text-white drop-shadow-[2px_2px_0px_#004040] tracking-[-0.02em] leading-tight mb-3">
-          Learning from people, too.
+          Experience &amp; Highlights.
         </h1>
         <p className="text-sm sm:text-base text-[#E6F4F4] leading-relaxed font-normal">
-          IT events, judging experiences, campus collaboration, and peer workshops.
+          Work experience, honors &amp; awards, organizations, leadership, and tech events.
         </p>
       </motion.div>
 
@@ -139,7 +227,7 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.97 }}
-              transition={{ duration: 0.35, delay: idx * 0.05, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.35, delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
               className="relative group"
             >
               {/* Pastel Win98 Square Timeline Node */}
@@ -157,8 +245,8 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
               {/* Win98 Timeline Window Card */}
               <div className="win98-window p-1">
                 <div className="win98-titlebar">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[11px] font-bold tracking-wide">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span className="text-[11px] font-bold tracking-wide truncate">
                       {item.badge} — {item.year}
                     </span>
                   </div>
@@ -173,11 +261,8 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
                     {item.role}
                   </p>
 
-                  <p className="text-sm text-[#111827] leading-relaxed font-normal mb-3">
+                  <p className="text-sm text-[#111827] leading-relaxed font-normal mb-5">
                     {item.summary}
-                  </p>
-                  <p className="text-xs sm:text-[13.5px] text-[#4B5563] leading-relaxed font-normal mb-5">
-                    {item.impact}
                   </p>
 
                   <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[#D4D0C8]">

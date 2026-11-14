@@ -22,14 +22,14 @@ export default function Footer({ onOpenContact }) {
             </button>
           )}
           <a
-            href="mailto:contact@student.example.com"
+            href="mailto:husnulkhotimah@houselab.my.id"
             className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
           >
             Email
             <ArrowUpRight size={13} />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/husnul-khotimah-8b953b248"
             target="_blank"
             rel="noopener noreferrer"
             className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
@@ -38,12 +38,30 @@ export default function Footer({ onOpenContact }) {
             <ArrowUpRight size={13} />
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/eicheich"
             target="_blank"
             rel="noopener noreferrer"
             className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
           >
             GitHub
+            <ArrowUpRight size={13} />
+          </a>
+          <a
+            href="https://huggingface.co/unalivehooman"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
+          >
+            Hugging Face
+            <ArrowUpRight size={13} />
+          </a>
+          <a
+            href="https://www.kaggle.com/unalivehooman"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
+          >
+            Kaggle
             <ArrowUpRight size={13} />
           </a>
         </div>

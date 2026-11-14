@@ -1,36 +1,36 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Award, BookOpen } from 'lucide-react';
+import { ArrowRight, Award, Briefcase, Users } from 'lucide-react';
 import { Win98WindowControls } from './RetroStickers';
 
 export default function BeyondTheScreen({ onViewActivities }) {
   const experiences = [
     {
-      role: 'Judge & Prototype Reviewer',
-      org: 'IT & Innovation Events',
-      period: '2025 – 2026',
+      role: 'Backend Developer Intern',
+      org: 'PT Teknologi Kartu Indonesia',
+      period: '2023 – 2024',
+      iconBg: '#DBEAFE',
+      icon: <Briefcase size={18} className="text-[#000080]" />,
+      summary:
+        'Engineered and maintained scalable backend services and RESTful APIs using FastAPI and MongoDB.',
+    },
+    {
+      role: 'Honors & Awards',
+      org: 'National & International',
+      period: '2023 – 2025',
       iconBg: '#FEF3C7',
       icon: <Award size={18} className="text-[#000080]" />,
       summary:
-        'Evaluated student software and ML prototypes on problem clarity, usability, and real-world feasibility.',
+        'Best International Essay (Jombang), 2nd Place Web Design PRISMA Festival & LKS Kudus, and Honorable Mention at Garuda Hacks 4.0.',
     },
     {
-      role: 'Software Engineering Student',
-      org: 'IPB University',
-      period: 'Ongoing',
-      iconBg: '#DBEAFE',
-      logo: '/logo-ipb.png',
-      summary:
-        'Collaborating with peers in hackathons, study groups, and campus tech initiatives to ship real products.',
-    },
-    {
-      role: 'Study Group Lead & Speaker',
-      org: 'Peer Learning & Workshops',
-      period: '2025 – 2026',
+      role: 'Organizations & Events',
+      org: 'IPB University · GDGoC · DevFest',
+      period: '2024 – 2026',
       iconBg: '#DCFCE7',
-      icon: <BookOpen size={18} className="text-[#000080]" />,
+      icon: <Users size={18} className="text-[#000080]" />,
       summary:
-        'Led hands-on sessions breaking down Python, machine learning basics, and React into simple steps.',
+        'IT Knowledge Judge & Treasurer, MICRO IT SHN Treasurer, Head of Medical Division, GDGoC IPB Member, and DevFest Bogor Participant.',
     },
   ];
 
@@ -55,7 +55,7 @@ export default function BeyondTheScreen({ onViewActivities }) {
             Experience & Highlights.
           </h2>
           <p className="text-sm sm:text-base text-[#E6FFFA] font-normal mb-5">
-            IT judging, campus software teamwork, and technical sharing.
+            Work experience, honors &amp; awards, organizations, and tech events.
           </p>
           <button
             onClick={onViewActivities}

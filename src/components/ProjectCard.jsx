@@ -35,7 +35,7 @@ export default function ProjectCard({
         y: { type: 'spring', stiffness: 360, damping: 24 },
       }}
       onClick={onClick}
-      className="group win98-window p-1 cursor-pointer text-left"
+      className="group win98-window p-1 cursor-pointer text-left flex flex-col"
     >
       {/* Classic Window Title Bar */}
       <div className="win98-titlebar px-2.5 py-1 flex items-center justify-between gap-2 mb-1">
@@ -46,7 +46,7 @@ export default function ProjectCard({
       </div>
 
       {/* Sunken Window Content Area */}
-      <div className="bg-[#FAF8F2] win98-sunken p-4 sm:p-5 flex flex-col sm:flex-row items-stretch justify-between gap-4">
+      <div className="bg-[#FAF8F2] win98-sunken p-4 sm:p-5 flex-1 flex flex-col sm:flex-row items-stretch justify-between gap-4">
         {/* Left: Copy & Bevel Button */}
         <div className="flex flex-col justify-between sm:w-[56%]">
           <div>

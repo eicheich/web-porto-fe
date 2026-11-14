@@ -1,5 +1,6 @@
-const RAW_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
+const RAW_BASE_URL = import.meta.env.DEV
+  ? '/ml-api'
+  : import.meta.env.VITE_API_BASE_URL || '';
 
 export const API_BASE_URL = RAW_BASE_URL.replace(/\/+$/, '');
 
@@ -52,35 +53,35 @@ async function parseErrorResponse(response) {
 
   if (status === 400) {
     throw new ApiError(
-      parsedDetail || 'Format gambar tidak didukung atau data tidak valid.',
+      parsedDetail || 'Unsupported file format or invalid input data.',
       400,
       detail
     );
   }
   if (status === 413) {
     throw new ApiError(
-      parsedDetail || 'Ukuran gambar melebihi batas maksimal yang diizinkan.',
+      parsedDetail || 'Image size exceeds the maximum allowed limit.',
       413,
       detail
     );
   }
   if (status === 422) {
     throw new ApiError(
-      parsedDetail || 'Data yang dimasukkan belum sesuai. Periksa kembali input Anda.',
+      parsedDetail || 'Input validation failed. Please check your entered values.',
       422,
       detail
     );
   }
   if (status >= 500) {
     throw new ApiError(
-      'Terjadi kendala pada sistem saat memproses permintaan. Silakan coba lagi sebentar lagi.',
+      'Something went wrong while processing your request. Please try again shortly.',
       status,
       detail
     );
   }
 
   throw new ApiError(
-    parsedDetail || 'Permintaan tidak dapat diproses saat ini.',
+    parsedDetail || 'Unable to process the request right now.',
     status,
     detail
   );
@@ -107,12 +108,12 @@ async function fetchWithTimeout(path, options = {}, timeoutMs = ML_TIMEOUT_MS) {
     }
     if (err?.name === 'AbortError') {
       throw new ApiError(
-        'Proses memakan waktu lebih lama dari biasanya. Silakan coba lagi sebentar lagi.',
+        'The request is taking longer than expected. Please try again in a moment.',
         408
       );
     }
     throw new ApiError(
-      'Layanan prediksi sedang tidak tersedia saat ini. Silakan coba lagi beberapa saat lagi.',
+      'Prediction service is currently unavailable. Please try again later.',
       0
     );
   } finally {
@@ -142,19 +143,19 @@ export function validateHousePricingInput({ LB, LT, KT, KM, GRS }) {
   const grs = Number(GRS);
 
   if (!Number.isFinite(lb) || lb <= 0 || lb > 100000) {
-    throw new ApiError('Luas Bangunan (LB) wajib lebih dari 0 dan maksimal 100.000 m².', 422);
+    throw new ApiError('Building Area (LB) must be greater than 0 and at most 100,000 m².', 422);
   }
   if (!Number.isFinite(lt) || lt <= 0 || lt > 100000) {
-    throw new ApiError('Luas Tanah (LT) wajib lebih dari 0 dan maksimal 100.000 m².', 422);
+    throw new ApiError('Land Area (LT) must be greater than 0 and at most 100,000 m².', 422);
   }
   if (!Number.isInteger(kt) || kt < 0 || kt > 100) {
-    throw new ApiError('Kamar Tidur (KT) harus bilangan bulat antara 0 hingga 100.', 422);
+    throw new ApiError('Bedrooms (KT) must be a whole number between 0 and 100.', 422);
   }
   if (!Number.isInteger(km) || km < 0 || km > 100) {
-    throw new ApiError('Kamar Mandi (KM) harus bilangan bulat antara 0 hingga 100.', 422);
+    throw new ApiError('Bathrooms (KM) must be a whole number between 0 and 100.', 422);
   }
   if (!Number.isInteger(grs) || grs < 0 || grs > 100) {
-    throw new ApiError('Kapasitas Garasi (GRS) harus bilangan bulat antara 0 hingga 100.', 422);
+    throw new ApiError('Garage Capacity (GRS) must be a whole number between 0 and 100.', 422);
   }
 
   return { LB: lb, LT: lt, KT: kt, KM: km, GRS: grs };
@@ -170,14 +171,14 @@ export async function predictHousePricing(rawInput) {
 }
 
 /**
- * C. Pengenalan Angka Tulisan Tangan (POST /predict-handwrite/)
+ * C. Handwritten Digit Recognition (POST /predict-handwrite/)
  */
 export async function predictHandwrittenDigit(imageBase64) {
   if (!imageBase64 || typeof imageBase64 !== 'string') {
-    throw new ApiError('Gambar canvas tidak boleh kosong.', 400);
+    throw new ApiError('Canvas drawing cannot be empty.', 400);
   }
   if (imageBase64.length > MAX_BASE64_LENGTH) {
-    throw new ApiError('Ukuran gambar base64 melebihi batas maksimal 2 MB.', 413);
+    throw new ApiError('Image size exceeds the 2 MB limit.', 413);
   }
 
   return fetchWithTimeout('/predict-handwrite/', {
@@ -188,22 +189,22 @@ export async function predictHandwrittenDigit(imageBase64) {
 }
 
 /**
- * D. Klasifikasi Gambar 3-Kelas: Cats, Dogs, Others (POST /predict)
+ * D. 3-Class Image Classifier: Cats, Dogs, Others (POST /predict)
  */
 export function validateImageFile(file) {
   if (!file) {
-    throw new ApiError('Pilih file gambar terlebih dahulu.', 400);
+    throw new ApiError('Please select an image file first.', 400);
   }
   const lowerName = (file.name || '').toLowerCase();
   const hasValidExt = ALLOWED_IMAGE_EXTENSIONS.some((ext) => lowerName.endsWith(ext));
   if (!hasValidExt) {
     throw new ApiError(
-      'Format file tidak didukung. Gunakan .png, .jpg, .jpeg, atau .webp.',
+      'Unsupported file format. Please use .png, .jpg, .jpeg, or .webp.',
       400
     );
   }
   if (file.size > MAX_IMAGE_FILE_BYTES) {
-    throw new ApiError('Ukuran file gambar melebihi batas maksimal 5 MB.', 413);
+    throw new ApiError('Image file size exceeds the 5 MB limit.', 413);
   }
 }
 

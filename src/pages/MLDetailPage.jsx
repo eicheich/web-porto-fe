@@ -189,7 +189,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
       const res = await predictHandwrittenDigit(imageBase64);
       setDigitResult(res);
     } catch (err) {
-      setDigitError(err.message || 'Gagal memprediksi angka tulisan tangan.');
+      setDigitError(err.message || 'Failed to predict the handwritten digit.');
     } finally {
       setDigitLoading(false);
     }
@@ -219,7 +219,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
       setSelectedFile(file);
       setPreviewUrl(nextUrl);
     } catch (err) {
-      setClassifierError(err.message || 'File gambar tidak valid.');
+      setClassifierError(err.message || 'Invalid image file.');
     }
   };
 
@@ -236,7 +236,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
       const res = await predictImageClass(fileToSend);
       setClassifierResult(res);
     } catch (err) {
-      setClassifierError(err.message || 'Gagal mengklasifikasikan gambar.');
+      setClassifierError(err.message || 'Failed to classify the image.');
     } finally {
       setClassifierLoading(false);
     }
@@ -268,7 +268,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
       });
       setHouseResult(res);
     } catch (err) {
-      setHouseError(err.message || 'Gagal menghitung estimasi harga rumah.');
+      setHouseError(err.message || 'Failed to estimate house price.');
     } finally {
       setHouseLoading(false);
     }
@@ -421,7 +421,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
               RAM: {Object.entries(apiStatus.modelsInMemory)
                 .filter(([, loaded]) => loaded)
                 .map(([name]) => name)
-                .join(', ') || 'Lazy (belum dimuat)'}
+                .join(', ') || 'Lazy (not loaded yet)'}
             </div>
           )}
         </div>
@@ -603,7 +603,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                 />
 
                 <p className="text-xs text-[#4B5563] mt-3">
-                  Gambar satu angka di tengah kotak, lalu klik Predict Digit untuk mengirim ke model MNIST CNN.
+                  Draw a single digit in the center of the box, then click Predict Digit to run inference.
                 </p>
               </div>
 
@@ -617,9 +617,9 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                     <div className="win98-raised bg-[#F5EDD6] p-3 mb-4 flex items-start gap-2 text-xs text-[#111827]">
                       <Loader2 size={15} className="animate-spin shrink-0 mt-0.5 text-[#000080]" />
                       <div>
-                        <div className="font-bold">Memproses gambar...</div>
+                        <div className="font-bold">Processing image...</div>
                         <div className="text-[11px] text-[#4B5563]">
-                          Request pertama memuat model (.keras) ke memori (cold-start ±10–60 detik).
+                          First request warms up the model in memory (~10–60s cold start).
                         </div>
                       </div>
                     </div>
@@ -643,7 +643,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                         </span>
                       </div>
                       <p className="text-xs text-[#4B5563]">
-                        Prediksi dikembalikan dari endpoint <code className="font-mono">POST /predict-handwrite/</code>.
+                        Predicted live from the handwritten digit classifier.
                       </p>
                     </>
                   ) : !digitLoading && !digitError ? (
@@ -652,7 +652,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                         Ready.
                       </h3>
                       <p className="text-xs text-[#4B5563]">
-                        Gambar angka pada canvas 280×280 di samping lalu tekan <strong>Predict Digit</strong>.
+                        Draw a digit on the 280×280 canvas on the left, then click <strong>Predict Digit</strong>.
                       </p>
                     </>
                   ) : null}
@@ -715,7 +715,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                 </div>
 
                 <span className="text-[11px] font-mono text-[#4B5563]">
-                  {selectedFile ? `${selectedFile.name} (${(selectedFile.size / 1024).toFixed(1)} KB)` : 'Sample: cat.jpg · Format: .png, .jpg, .jpeg, .webp (maks 5 MB)'}
+                  {selectedFile ? `${selectedFile.name} (${(selectedFile.size / 1024).toFixed(1)} KB)` : 'Sample: cat.jpg · Formats: .png, .jpg, .jpeg, .webp (max 5 MB)'}
                 </span>
               </div>
 
@@ -729,9 +729,9 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                     <div className="win98-raised bg-[#F5EDD6] p-3 mb-4 flex items-start gap-2 text-xs text-[#111827]">
                       <Loader2 size={15} className="animate-spin shrink-0 mt-0.5 text-[#000080]" />
                       <div>
-                        <div className="font-bold">Menganalisis gambar...</div>
+                        <div className="font-bold">Analyzing image...</div>
                         <div className="text-[11px] text-[#4B5563]">
-                          Request pertama memuat model classifier ke memori (cold-start ±10–60 detik).
+                          First request warms up the classifier model (~10–60s cold start).
                         </div>
                       </div>
                     </div>
@@ -793,14 +793,14 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                         Ready to classify.
                       </h3>
                       <p className="text-xs text-[#4B5563]">
-                        Pilih foto atau gunakan sample, lalu klik <strong>Classify Image</strong>.
+                        Upload a photo or use the sample image, then click <strong>Classify Image</strong>.
                       </p>
                     </div>
                   ) : null}
                 </div>
 
                 <span className="text-[11px] font-mono text-[#4B5563] mt-4">
-                  Endpoint: POST /predict (multipart/form-data)
+                  3-Class Vision Classifier
                 </span>
               </div>
             </div>
@@ -816,7 +816,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
                     <label htmlFor="house-lb" className="block text-xs font-bold text-[#111827] mb-1">
-                      Luas Bangunan (LB, m²)
+                      Building Area (LB, m²)
                     </label>
                     <input
                       id="house-lb"
@@ -833,7 +833,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
 
                   <div>
                     <label htmlFor="house-lt" className="block text-xs font-bold text-[#111827] mb-1">
-                      Luas Tanah (LT, m²)
+                      Land Area (LT, m²)
                     </label>
                     <input
                       id="house-lt"
@@ -850,7 +850,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
 
                   <div>
                     <label htmlFor="house-kt" className="block text-xs font-bold text-[#111827] mb-1">
-                      Kamar Tidur (KT)
+                      Bedrooms (KT)
                     </label>
                     <input
                       id="house-kt"
@@ -867,7 +867,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
 
                   <div>
                     <label htmlFor="house-km" className="block text-xs font-bold text-[#111827] mb-1">
-                      Kamar Mandi (KM)
+                      Bathrooms (KM)
                     </label>
                     <input
                       id="house-km"
@@ -884,7 +884,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
 
                   <div className="sm:col-span-2">
                     <label htmlFor="house-grs" className="block text-xs font-bold text-[#111827] mb-1">
-                      Kapasitas Garasi (GRS, mobil)
+                      Garage Capacity (GRS, cars)
                     </label>
                     <input
                       id="house-grs"
@@ -906,7 +906,7 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                     disabled={houseLoading}
                     className="win98-raised px-5 py-2 text-xs font-bold text-[#000080] cursor-pointer disabled:opacity-50"
                   >
-                    {houseLoading ? 'Menghitung Estimasi...' : 'Estimasi Harga Rumah'}
+                    {houseLoading ? 'Estimating Price...' : 'Estimate House Price'}
                   </button>
                 </div>
               </form>
@@ -921,9 +921,9 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                     <div className="win98-raised bg-[#F5EDD6] p-3 mb-4 flex items-start gap-2 text-xs text-[#111827]">
                       <Loader2 size={15} className="animate-spin shrink-0 mt-0.5 text-[#000080]" />
                       <div>
-                        <div className="font-bold">Menghitung prediksi...</div>
+                        <div className="font-bold">Calculating prediction...</div>
                         <div className="text-[11px] text-[#4B5563]">
-                          Request pertama memuat model (.joblib) ke memori (cold-start ±10–60 detik).
+                          First request warms up the regression model (~10–60s cold start).
                         </div>
                       </div>
                     </div>
@@ -943,22 +943,22 @@ export default function MLDetailPage({ projectId = 'reading-between-the-words', 
                       </h3>
                       <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#15803D] font-bold">
                         <CheckCircle2 size={13} />
-                        Status: {houseResult.status || 'sukses'}
+                        Status: {houseResult.status || 'success'}
                       </div>
                     </>
                   ) : !houseLoading && !houseError ? (
                     <>
                       <h3 className="font-display text-2xl font-extrabold text-[#111827] mb-1">
-                        Siap menghitung.
+                        Ready to estimate.
                       </h3>
                       <p className="text-xs text-[#4B5563]">
-                        Isi parameter LB, LT, KT, KM, dan GRS lalu klik <strong>Estimasi Harga Rumah</strong>.
+                        Enter LB, LT, KT, KM, and GRS values, then click <strong>Estimate House Price</strong>.
                       </p>
                     </>
                   ) : null}
                 </div>
                 <span className="text-[11px] font-mono text-[#4B5563] mt-4">
-                  Endpoint: POST /predict-house-pricing
+                  Regression Price Estimator
                 </span>
               </div>
             </div>
