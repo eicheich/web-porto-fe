@@ -6,7 +6,7 @@ import Button from '../components/Button';
 const SOFTWARE_DETAILS = {
   unravel: {
     index: '01',
-    category: 'Web Application · Case Analysis',
+    category: 'Web Application · React & Golang',
     title: 'Unravel',
     summary:
       'An interactive problem-solving platform combining structured case analysis paths, peer discussions, and progress tracking.',
@@ -18,14 +18,14 @@ const SOFTWARE_DETAILS = {
     liveLabel: 'Open Live Demo',
     specs: [
       { label: 'Platform', value: 'Web App' },
-      { label: 'Stack', value: 'React · Tailwind' },
+      { label: 'Stack', value: 'React · Golang' },
       { label: 'Focus', value: 'Case Workflow' },
     ],
     whyTitle: 'A clearer way to practice structured case analysis.',
     whyBody:
       'Practicing critical thinking often feels abstract without a clear framework. Unravel organizes interactive learning paths, peer review discussions, and progress tracking so learners break down cases consistently.',
-    role: 'Designed the interactive interface, 3-step case analysis workflow, public review forum, and points/ranking system.',
-    stack: ['React', 'Tailwind CSS', 'Interactive UI', 'Case Study'],
+    role: 'Designed the interactive React interface, 3-step case analysis workflow, and integrated Golang backend services for discussions and ranking.',
+    stack: ['React', 'Golang', 'Interactive UI', 'Case Study'],
     features: [
       {
         title: 'Real-World Case Breakdown',
@@ -79,7 +79,7 @@ const SOFTWARE_DETAILS = {
   },
   devco: {
     index: '03',
-    category: 'Web Application · Social Platform · 2022',
+    category: 'Web Application · Laravel',
     title: 'DevCo',
     summary:
       'A developer-focused social platform with a post composer, curated feed views, user discovery, and community interactions.',
@@ -91,14 +91,14 @@ const SOFTWARE_DETAILS = {
     liveLabel: 'Open Live Demo',
     specs: [
       { label: 'Platform', value: 'Web App' },
-      { label: 'Stack', value: 'Bootstrap · Web' },
-      { label: 'Year', value: '2022' },
+      { label: 'Stack', value: 'Laravel' },
+      { label: 'Focus', value: 'Social Platform' },
     ],
     whyTitle: 'A dedicated space to share what you are building.',
     whyBody:
       'DevCo brings a post composer, chronological feed, people search, and friend connections into one clean social workspace.',
-    role: 'Built the web application end-to-end around a social feed, posting flow, people discovery, and profile screens.',
-    stack: ['Web App', 'Social Feed', 'Bootstrap', '2022'],
+    role: 'Built the web application end-to-end with Laravel around a social feed, posting flow, people discovery, and profile screens.',
+    stack: ['Laravel', 'Web App', 'Social Feed'],
     features: [
       {
         title: 'Post Composer & Feed',
@@ -116,7 +116,7 @@ const SOFTWARE_DETAILS = {
   },
   tasku: {
     index: '04',
-    category: 'Web Application · Multi-Platform Broadcast',
+    category: 'Web Application · Laravel & Python',
     title: 'Tasku',
     summary:
       'A centralized team communication hub that broadcasts announcements simultaneously across WhatsApp, Discord, and Telegram in a single click.',
@@ -127,15 +127,15 @@ const SOFTWARE_DETAILS = {
     liveUrl: 'https://tasku.site/',
     liveLabel: 'Open Live Demo',
     specs: [
-      { label: 'Platform', value: 'Web App' },
+      { label: 'Stack', value: 'Laravel · Python' },
       { label: 'Channels', value: 'WA · Discord · TG' },
       { label: 'Focus', value: 'Team Broadcast' },
     ],
     whyTitle: 'One click to keep every team group updated without manual copy-paste.',
     whyBody:
       'Teams often spread updates across WhatsApp groups, Discord channels, and Telegram chats. Tasku centralizes announcements into one dispatch console so critical info never gets missed.',
-    role: 'Designed and built the multi-platform broadcast interface, unified dispatch workflow, and live per-channel delivery status tracking.',
-    stack: ['Web App', 'Multi-Platform', 'WhatsApp', 'Discord', 'Telegram'],
+    role: 'Built the web platform with Laravel and Python automation workers for unified multi-platform dispatch and live per-channel delivery status tracking.',
+    stack: ['Laravel', 'Python', 'WhatsApp', 'Discord', 'Telegram'],
     features: [
       {
         title: 'Simultaneous Multi-Platform Dispatch',
@@ -153,26 +153,26 @@ const SOFTWARE_DETAILS = {
   },
   'pinggir-sawah-iboe': {
     index: '05',
-    category: 'Web Application · Culinary & Hospitality',
-    title: 'Pinggir Sawah Iboe',
+    category: 'Web Application · Django & React',
+    title: 'Pemancingan Pinggir Sawah Iboe',
     summary:
       'An editorial website for Pemancingan & W.M Pinggir Sawah Iboe showcasing the dining menu, fishing grounds, articles, and direct WhatsApp reservations.',
     type: 'web',
     image: '/pinggir-sawah-iboe.jpg',
-    imageAlt: 'Pinggir Sawah Iboe restaurant and fishing park website',
+    imageAlt: 'Pemancingan Pinggir Sawah Iboe restaurant and fishing park website',
     displayUrl: 'pasar-sawah-iboe.vercel.app',
     liveUrl: 'https://pasar-sawah-iboe.vercel.app/',
     liveLabel: 'Open Live Demo',
     specs: [
-      { label: 'Platform', value: 'Web App' },
+      { label: 'Stack', value: 'Django · React' },
       { label: 'Industry', value: 'F&B · Tourism' },
       { label: 'Focus', value: 'Brand & Menu' },
     ],
     whyTitle: 'Bringing a local dining and fishing destination online cleanly.',
     whyBody:
       'Built to give visitors a warm first impression of the venue before visiting—highlighting the culinary menu, scenic fishing ponds, stories, and instant WhatsApp contact.',
-    role: 'Designed and built the responsive web application with editorial typography, photo gallery strip, menu navigation, articles section, and direct WhatsApp integration.',
-    stack: ['Web App', 'Responsive UI', 'Editorial Design', 'Vercel'],
+    role: 'Built the web application with Django backend and React frontend, featuring editorial typography, photo gallery strip, menu navigation, articles section, and direct WhatsApp integration.',
+    stack: ['Django', 'React', 'Responsive UI', 'Editorial Design'],
     features: [
       {
         title: 'Editorial Hero & Venue Gallery',
@@ -190,7 +190,7 @@ const SOFTWARE_DETAILS = {
   },
   'langkah-baswara': {
     index: '06',
-    category: 'Web-GIS · Bali Travel & Itinerary',
+    category: 'Web-GIS · QGIS, FastAPI & React',
     title: 'Langkah Baswara',
     summary:
       'An interactive Web-GIS platform designed to help travelers plan Bali trips faster with preference-based destination discovery and automated itinerary building.',
@@ -201,15 +201,15 @@ const SOFTWARE_DETAILS = {
     liveUrl: 'https://langkah-baswara-peach.vercel.app/',
     liveLabel: 'Open Live Demo',
     specs: [
-      { label: 'Platform', value: 'Web-GIS' },
+      { label: 'Stack', value: 'QGIS · FastAPI · React' },
       { label: 'Domain', value: 'Bali Tourism' },
       { label: 'Focus', value: 'Itinerary Builder' },
     ],
     whyTitle: 'Planning Bali trips around routes and personal preferences.',
     whyBody:
       'Travelers visiting Bali often spend hours stitching scattered recommendations together. Langkah Baswara pairs interactive Web-GIS exploration with preference-driven itinerary planning so trips stay efficient and organized.',
-    role: 'Built the interactive Web-GIS travel experience, destination exploration flow, and personalized itinerary planning interface.',
-    stack: ['Web-GIS', 'Interactive Map', 'Itinerary Planner', 'Vercel'],
+    role: 'Prepared spatial layers in QGIS, engineered the FastAPI geospatial & itinerary endpoints, and built the interactive React Web-GIS frontend.',
+    stack: ['QGIS', 'FastAPI', 'React', 'Web-GIS'],
     features: [
       {
         title: 'Interactive Web-GIS Exploration',
@@ -227,10 +227,10 @@ const SOFTWARE_DETAILS = {
   },
   furai: {
     index: '07',
-    category: 'Web App · MediaPipe & Productivity',
+    category: 'Web App · React, FastAPI & Google MediaPipe',
     title: 'Furai',
     summary:
-      'A browser-based study companion powered by MediaPipe webcam pose detection that alerts you when slouching, paired with a built-in Pomodoro study space.',
+      'A browser-based study companion powered by Google MediaPipe webcam pose detection that alerts you when slouching, paired with a built-in Pomodoro study space.',
     type: 'web',
     image: '/furai.png',
     imageAlt: 'Furai MediaPipe posture detection and study space web app',
@@ -238,15 +238,15 @@ const SOFTWARE_DETAILS = {
     liveUrl: 'https://furai-green.vercel.app/',
     liveLabel: 'Open Live Demo',
     specs: [
-      { label: 'Vision', value: 'MediaPipe Pose' },
-      { label: 'Privacy', value: '100% In-Browser' },
+      { label: 'Stack', value: 'React · FastAPI' },
+      { label: 'Vision', value: 'Google MediaPipe' },
       { label: 'Focus', value: 'Posture · Pomodoro' },
     ],
     whyTitle: 'Catching slouching posture right in the browser with zero video uploads.',
     whyBody:
-      'Long coding and study sessions easily lead to bad posture. Furai runs lightweight MediaPipe pose estimation locally on your laptop webcam—zero server uploads—combined with a focused Pomodoro study room.',
-    role: 'Built the real-time MediaPipe webcam posture angle detection, slouch alert feedback, and integrated Pomodoro study space UI.',
-    stack: ['MediaPipe', 'Computer Vision', 'Webcam AI', 'Pomodoro'],
+      'Long coding and study sessions easily lead to bad posture. Furai runs lightweight Google MediaPipe pose estimation locally on your laptop webcam—zero server uploads—combined with a focused Pomodoro study room.',
+    role: 'Built the React frontend, FastAPI backend services, real-time Google MediaPipe webcam posture detection, and Pomodoro study space UI.',
+    stack: ['React', 'FastAPI', 'Google MediaPipe', 'Pomodoro'],
     features: [
       {
         title: 'Real-Time MediaPipe Posture Detection',
@@ -273,7 +273,7 @@ export default function SoftwareDetailPage({ projectId = 'unravel', onBackToProj
   };
 
   return (
-    <main className="max-w-6xl mx-auto px-6 sm:px-10 pt-10 sm:pt-14 pb-20">
+    <main className="max-w-6xl mx-auto px-4 sm:px-10 pt-6 sm:pt-14 pb-14 sm:pb-20">
       {/* Top Navigation Row */}
       <div className="flex items-center justify-between gap-4 pb-6 mb-10 border-b border-[#E2E8F0]">
         <Button onClick={onBackToProjects} className="group min-h-[44px]">
@@ -308,13 +308,13 @@ export default function SoftwareDetailPage({ projectId = 'unravel', onBackToProj
           </p>
 
           {/* 3-Column Metro Spec Strip */}
-          <div className="grid grid-cols-3 gap-4 py-4 mb-7 border-y border-[#E2E8F0]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 py-4 mb-7 border-y border-[#E2E8F0]">
             {project.specs.map((spec) => (
               <div key={spec.label} className="min-w-0">
                 <span className="block font-mono text-[10px] uppercase tracking-wider text-[#64748B] mb-0.5">
                   {spec.label}
                 </span>
-                <span className="block font-metro text-sm font-medium text-[#0F172A] truncate">
+                <span className="block font-metro text-sm font-medium text-[#0F172A]">
                   {spec.value}
                 </span>
               </div>
@@ -322,7 +322,7 @@ export default function SoftwareDetailPage({ projectId = 'unravel', onBackToProj
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Button variant="primary" onClick={scrollToFeatures} className="min-h-[44px]">
+            <Button variant="primary" onClick={scrollToFeatures} className="w-full sm:w-auto justify-center min-h-[44px]">
               <span>Explore the build</span>
               <ArrowDown size={14} aria-hidden="true" />
             </Button>
@@ -334,7 +334,7 @@ export default function SoftwareDetailPage({ projectId = 'unravel', onBackToProj
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-[44px]"
+                className="w-full sm:w-auto justify-center min-h-[44px]"
               >
                 <span>{project.liveLabel}</span>
                 <ArrowUpRight size={14} aria-hidden="true" />

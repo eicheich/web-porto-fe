@@ -65,7 +65,7 @@ export default function Navbar({
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 h-13 sm:h-16 flex items-center justify-between gap-4">
         {/* Left: Windows 8 Metro 4-Tile Mark + Brand */}
         <a
           href="#"
@@ -107,10 +107,10 @@ export default function Navbar({
         </nav>
       </div>
 
-      {/* Mobile: 1-Tap Horizontally Scrollable Pivot Strip */}
+      {/* Mobile: 4-Column Fixed-Target Pivot Grid */}
       <nav
         aria-label="Mobile navigation"
-        className="md:hidden border-t border-[#E2E8F0] bg-[#F8FAFC] px-4 py-2 flex items-center gap-1.5 overflow-x-auto"
+        className="md:hidden border-t border-[#E2E8F0] bg-[#F8FAFC] grid grid-cols-4 divide-x divide-[#E2E8F0]"
       >
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -120,14 +120,14 @@ export default function Navbar({
               key={item.id}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.id)}
-              className={`px-3 py-1.5 inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap shrink-0 transition-colors ${
+              className={`min-h-[44px] px-1 flex items-center justify-center gap-1 text-[11px] font-bold whitespace-nowrap transition-colors ${
                 isActive
                   ? 'bg-[#0078D7] text-white'
-                  : 'bg-white border border-[#CBD5E1] text-[#334155]'
+                  : 'text-[#334155] hover:bg-[#F1F5F9]'
               }`}
             >
-              <Icon size={12} aria-hidden="true" />
-              <span>{item.label}</span>
+              <Icon size={12} className="shrink-0" aria-hidden="true" />
+              <span className="truncate">{item.label}</span>
             </a>
           );
         })}

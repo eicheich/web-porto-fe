@@ -11,7 +11,7 @@ export default function MLExplorations({ onSelectProject, onViewAllProjects }) {
   return (
     <section
       id="ml-projects"
-      className="bg-white border-t border-[#E2E8F0] text-[#0F172A] py-20 px-6 sm:px-10 scroll-mt-16"
+      className="bg-white border-t border-[#E2E8F0] text-[#0F172A] py-14 sm:py-20 px-4 sm:px-10 scroll-mt-24 md:scroll-mt-16"
     >
       <div className="max-w-6xl mx-auto">
         {/* Editorial Header */}
@@ -34,7 +34,7 @@ export default function MLExplorations({ onSelectProject, onViewAllProjects }) {
             </p>
           </div>
 
-          <Button onClick={onViewAllProjects} className="group self-start md:self-auto shrink-0 min-h-[44px]">
+          <Button onClick={onViewAllProjects} className="group w-full sm:w-auto justify-center md:self-auto shrink-0 min-h-[44px]">
             View all {mlProjectsData.length} ML projects
             <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
           </Button>

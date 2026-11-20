@@ -121,7 +121,7 @@ export const mlProjectsData = [
 export const softwareProjectsData = [
   {
     id: 'unravel',
-    category: 'Web Application · Case Analysis',
+    category: 'Web Application · React & Golang',
     title: 'Unravel',
     description: 'Learn structured case analysis through interactive learning paths and community discussions.',
     ctaLabel: 'View case study',
@@ -158,7 +158,7 @@ export const softwareProjectsData = [
   },
   {
     id: 'devco',
-    category: 'Web Application · Social Platform · 2022',
+    category: 'Web Application · Laravel',
     title: 'DevCo',
     description: 'A social platform with a post feed, profile discovery, and community interactions.',
     ctaLabel: 'View case study',
@@ -178,7 +178,7 @@ export const softwareProjectsData = [
   },
   {
     id: 'tasku',
-    category: 'Web Application · Multi-Platform Broadcast',
+    category: 'Web Application · Laravel & Python',
     title: 'Tasku',
     description: 'Team information control hub that broadcasts announcements simultaneously to WhatsApp, Discord, and Telegram.',
     ctaLabel: 'View case study',
@@ -198,8 +198,8 @@ export const softwareProjectsData = [
   },
   {
     id: 'pinggir-sawah-iboe',
-    category: 'Web Application · Culinary & Hospitality',
-    title: 'Pinggir Sawah Iboe',
+    category: 'Web Application · Django & React',
+    title: 'Pemancingan Pinggir Sawah Iboe',
     description: 'Editorial web presence for a riverside restaurant and fishing park featuring menu showcase, articles, and direct WhatsApp booking.',
     ctaLabel: 'View case study',
     stageBg: '#E2E8F0',
@@ -218,7 +218,7 @@ export const softwareProjectsData = [
   },
   {
     id: 'langkah-baswara',
-    category: 'Web-GIS · Bali Travel & Itinerary',
+    category: 'Web-GIS · QGIS, FastAPI & React',
     title: 'Langkah Baswara',
     description: 'Interactive Web-GIS platform for planning Bali trips with personalized itinerary generation and destination discovery.',
     ctaLabel: 'View case study',
@@ -238,7 +238,7 @@ export const softwareProjectsData = [
   },
   {
     id: 'furai',
-    category: 'Web App · MediaPipe Posture & Study Space',
+    category: 'Web App · React, FastAPI & Google MediaPipe',
     title: 'Furai',
     description: 'In-browser MediaPipe webcam posture detector that catches slouching in real time alongside a Pomodoro study space.',
     ctaLabel: 'View case study',

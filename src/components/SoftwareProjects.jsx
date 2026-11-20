@@ -17,7 +17,7 @@ export default function SoftwareProjects({ onSelectStory }) {
   return (
     <section
       id="software"
-      className="bg-[#F1F5F9] border-t border-[#E2E8F0] text-[#0F172A] py-20 px-6 sm:px-10 scroll-mt-16"
+      className="bg-[#F1F5F9] border-t border-[#E2E8F0] text-[#0F172A] py-14 sm:py-20 px-4 sm:px-10 scroll-mt-24 md:scroll-mt-16"
     >
       <div className="max-w-6xl mx-auto">
         {/* Editorial Header */}
@@ -42,7 +42,7 @@ export default function SoftwareProjects({ onSelectStory }) {
 
           <Button
             onClick={() => (window.location.hash = '/software-projects')}
-            className="group self-start md:self-auto shrink-0 min-h-[44px]"
+            className="group w-full sm:w-auto justify-center md:self-auto shrink-0 min-h-[44px]"
           >
             View all {softwareProjectsData.length} software projects
             <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
@@ -114,12 +114,12 @@ export default function SoftwareProjects({ onSelectStory }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.35, delay: 0.08 + idx * 0.05 }}
-                className="metro-tile group flex-1 bg-white hover:bg-[#F8FAFC] border border-[#CBD5E1] hover:border-[#0078D7] flex items-stretch text-left cursor-pointer transition-colors overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0078D7]"
+                className="metro-tile group flex-1 bg-white hover:bg-[#F8FAFC] border border-[#CBD5E1] hover:border-[#0078D7] flex flex-col sm:flex-row items-stretch text-left cursor-pointer transition-colors overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0078D7]"
               >
                 {/* Compact Visual Thumbnail Stage */}
                 <div
                   style={{ backgroundColor: project.stageBg || '#E2E8F0' }}
-                  className="w-36 sm:w-44 shrink-0 p-3 flex items-center justify-center border-r border-[#E2E8F0] overflow-hidden"
+                  className="w-full sm:w-44 shrink-0 p-3 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-[#E2E8F0] overflow-hidden"
                 >
                   <div className="w-full flex items-center justify-center">
                     {project.preview}

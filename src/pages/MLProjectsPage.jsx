@@ -15,7 +15,7 @@ export default function MLProjectsPage({
   const [featuredML, ...otherML] = mlProjectsData;
 
   return (
-    <main className="max-w-6xl mx-auto px-6 sm:px-10 pt-8 sm:pt-12 pb-20 relative">
+    <main className="max-w-6xl mx-auto px-4 sm:px-10 pt-6 sm:pt-12 pb-14 sm:pb-20 relative">
       {/* Top Bar: Back + Tactile Category Switcher */}
       <motion.div
         initial={{ opacity: 0, y: -8 }}
@@ -28,13 +28,13 @@ export default function MLProjectsPage({
           Back to home
         </Button>
 
-        <div className="win98-window p-1 inline-flex items-center gap-1" role="tablist" aria-label="Project categories">
+        <div className="w-full sm:w-auto bg-white border border-[#CBD5E1] p-1 grid grid-cols-2 sm:inline-flex items-center gap-1" role="tablist" aria-label="Project categories">
           <button
             type="button"
             role="tab"
             aria-selected={activeTab === 'ml'}
             onClick={() => setActiveTab('ml')}
-            className={`px-4 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
+            className={`min-h-[44px] px-3 sm:px-4 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
               activeTab === 'ml'
                 ? 'bg-[#0078D7] text-white'
                 : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9]'
@@ -47,7 +47,7 @@ export default function MLProjectsPage({
             role="tab"
             aria-selected={activeTab === 'software'}
             onClick={() => setActiveTab('software')}
-            className={`px-4 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
+            className={`min-h-[44px] px-3 sm:px-4 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
               activeTab === 'software'
                 ? 'bg-[#0078D7] text-white'
                 : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9]'

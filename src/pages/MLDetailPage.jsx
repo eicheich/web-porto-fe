@@ -231,7 +231,7 @@ export default function MLDetailPage({ projectId = 'fraud-detection', onBackToPr
   };
 
   return (
-    <main className="max-w-6xl mx-auto px-6 sm:px-10 pt-8 sm:pt-12 pb-20">
+    <main className="max-w-6xl mx-auto px-4 sm:px-8 pt-6 sm:pt-12 pb-14 sm:pb-20">
       {/* Top Bar: Back */}
       <motion.div
         initial={{ opacity: 0, x: -8 }}
@@ -301,7 +301,7 @@ export default function MLDetailPage({ projectId = 'fraud-detection', onBackToPr
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white border border-[#CBD5E1] hover:border-[#0078D7] hover:bg-[#0078D7] hover:text-white px-3.5 py-2 text-xs font-semibold text-[#0F172A] inline-flex items-center gap-1.5 transition-colors"
+                className="min-h-[44px] flex-1 sm:flex-initial justify-center bg-white border border-[#CBD5E1] hover:border-[#0078D7] hover:bg-[#0078D7] hover:text-white px-3.5 py-2 text-xs font-semibold text-[#0F172A] inline-flex items-center gap-1.5 transition-colors"
               >
                 <ExternalLink size={13} aria-hidden="true" />
                 {link.label}
@@ -639,6 +639,7 @@ export default function MLDetailPage({ projectId = 'fraud-detection', onBackToPr
                     type="submit"
                     variant="primary"
                     disabled={houseLoading}
+                    className="w-full sm:w-auto min-h-[44px]"
                   >
                     {houseLoading ? 'Estimating Price...' : 'Estimate House Price'}
                   </Button>

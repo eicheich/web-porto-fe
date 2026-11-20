@@ -48,9 +48,9 @@ export const Hero = () => {
     <section
       id="top"
       aria-labelledby="hero-heading"
-      className="bg-[#F8FAFC] border-b border-[#E2E8F0]"
+      className="bg-[#F8FAFC] border-b border-[#E2E8F0] overflow-x-hidden"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left: Clean Windows 8 Metro editorial typography */}
           <div className="lg:col-span-6">
@@ -76,22 +76,22 @@ export const Hero = () => {
               I build interactive ML models, scalable backend APIs, and web &amp; mobile apps.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-2.5 sm:gap-3">
               <Button
                 as="a"
                 href="#ml-projects"
                 variant="primary"
-                className="min-h-[44px]"
+                className="min-h-[44px] whitespace-nowrap px-4 sm:px-5 text-xs sm:text-sm"
               >
                 Explore projects
-                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
               </Button>
 
               <Button
                 as="a"
                 href="#experience"
                 variant="secondary"
-                className="min-h-[44px]"
+                className="min-h-[44px] whitespace-nowrap px-4 sm:px-5 text-xs sm:text-sm"
               >
                 Experience
               </Button>
@@ -101,7 +101,7 @@ export const Hero = () => {
                   type="button"
                   variant="text"
                   onClick={handleCopyEmail}
-                  className="min-h-[44px]"
+                  className="min-h-[44px] whitespace-nowrap text-xs sm:text-sm"
                   aria-label={`Copy email address ${CONTACT_EMAIL}`}
                 >
                   {copied ? (
@@ -145,8 +145,8 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Square Windows 8 3D Perspective Card — 4 Tiles Flip 1-by-1 & Merge into Portrait */}
-          <div className="lg:col-span-6 w-full max-w-[390px] mx-auto lg:ml-auto py-4">
+          {/* Right: Square Windows 8 3D Perspective Card — Desktop/Tablet only */}
+          <div className="hidden md:block lg:col-span-6 w-full max-w-[390px] mx-auto lg:ml-auto py-4">
             <motion.button
               type="button"
               onClick={() => setIsRevealed((prev) => !prev)}

@@ -78,7 +78,7 @@ export default function HandwriteCanvas({ onPredict, isLoading = false }) {
 
   return (
     <div className="flex flex-col items-start gap-3">
-      <div className="win98-sunken bg-white p-1 inline-block">
+      <div className="w-full max-w-[280px] aspect-square border border-[#CBD5E1] bg-white p-1">
         <canvas
           ref={canvasRef}
           width={280}
@@ -88,17 +88,17 @@ export default function HandwriteCanvas({ onPredict, isLoading = false }) {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
           style={{ touchAction: 'none' }}
-          className="w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] block cursor-crosshair bg-white"
+          className="w-full h-full block cursor-crosshair bg-white"
           aria-label="Handwriting canvas for digit 0 to 9"
         />
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="w-full max-w-[280px] flex items-center gap-2.5">
         <Button
           type="button"
           onClick={resetCanvas}
           disabled={isLoading}
-          className="text-[#4B5563] hover:text-[#991B1B] hover:bg-[#FEE2E2]"
+          className="flex-1 sm:flex-initial min-h-[44px] text-[#4B5563] hover:text-[#991B1B] hover:bg-[#FEE2E2]"
         >
           Clear Canvas
         </Button>
@@ -107,6 +107,7 @@ export default function HandwriteCanvas({ onPredict, isLoading = false }) {
           variant="primary"
           onClick={handleSubmit}
           disabled={!hasDrawn || isLoading}
+          className="flex-1 sm:flex-initial min-h-[44px]"
         >
           {isLoading ? 'Predicting...' : 'Predict Digit'}
         </Button>

@@ -239,7 +239,7 @@ export default function FraudDetectionDemo() {
           </div>
 
           {/* Metro Pivot Tabs */}
-          <div className="flex flex-wrap gap-1.5 border-b border-[#E2E8F0] pb-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap gap-1.5 border-b border-[#E2E8F0] pb-3">
             {TABS.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -615,6 +615,7 @@ export default function FraudDetectionDemo() {
           <Button
             type="submit"
             disabled={loading}
+            className="w-full sm:w-auto min-h-[44px]"
           >
             {loading && <Loader2 size={14} className="animate-spin" />}
             {loading ? 'Evaluating...' : 'Analyze Transaction'}
@@ -658,7 +659,7 @@ export default function FraudDetectionDemo() {
                       isFraud ? 'text-[#991B1B]' : 'text-[#008272]'
                     }`}
                   >
-                    {result.prediction_label}
+                    {result.prediction_label || (isFraud ? 'Fraudulent' : 'Legitimate')}
                   </h3>
                 </div>
 

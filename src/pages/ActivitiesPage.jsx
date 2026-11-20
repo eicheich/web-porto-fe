@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { ArrowLeft, ArrowRight, Briefcase, MessageSquare, Trophy, Users } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Briefcase, MessageSquare, Trophy, Users, X } from 'lucide-react';
 import Button from '../components/Button';
 
 const TYPE_META = {
@@ -112,21 +112,190 @@ const ACTIVITIES_DATA = [
   },
 ];
 
+const CERTIFICATES_DATA = [
+  {
+    id: 'google-gemini',
+    title: 'Gemini Certified Student (Google AI)',
+    issuer: 'Google for Education',
+    date: 'Nov 2026',
+    image: '/cert-google-gemini.png',
+    accent: '#1A73E8',
+    gridSpan: 'md:col-span-2 lg:col-span-7',
+  },
+  {
+    id: 'amd-ai-academy',
+    title: 'AI on AMD',
+    issuer: 'AMD AI Academy',
+    date: 'Oct 2026',
+    image: '/cert-amd-ai.jpg',
+    accent: '#0F172A',
+    gridSpan: 'md:col-span-1 lg:col-span-5',
+  },
+  {
+    id: 'garuda-hacks-2023',
+    title: 'Honorable Mention Sustainability Hack (HijauKita)',
+    issuer: 'Garuda Hacks 4.0',
+    date: 'Jul 2023',
+    image: '/cert-garuda-hacks.jpg',
+    accent: '#4C0519',
+    gridSpan: 'md:col-span-1 lg:col-span-5',
+  },
+  {
+    id: 'web-design-uinsa',
+    title: 'Juara II — Web Design Competition Nasional',
+    issuer: 'Pekan Raya SI · UIN Sunan Ampel Surabaya',
+    date: 'Dec 2025',
+    image: '/cert-web-design-uinsa.jpg',
+    accent: '#1D4ED8',
+    gridSpan: 'md:col-span-2 lg:col-span-7',
+  },
+  {
+    id: 'hackerrank-problem-solving',
+    title: 'Problem Solving (Basic)',
+    issuer: 'HackerRank',
+    date: 'Dec 2023',
+    image: '/cert-hackerrank-problem-solving.jpg',
+    accent: '#15803D',
+    gridSpan: 'md:col-span-1 lg:col-span-6',
+  },
+  {
+    id: 'github-career-essentials',
+    title: 'Career Essentials in GitHub',
+    issuer: 'LinkedIn Learning · GitHub',
+    date: 'Jan 2025',
+    image: '/cert-github.jpg',
+    accent: '#0078D7',
+    gridSpan: 'md:col-span-1 lg:col-span-6',
+  },
+  {
+    id: 'essay-stikes',
+    title: 'Best International Essay Category',
+    issuer: 'STIKES Pemkab Jombang',
+    date: 'Dec 2025',
+    image: '/cert-essay-stikes.jpg',
+    accent: '#0D9488',
+    gridSpan: 'md:col-span-1 lg:col-span-6',
+  },
+  {
+    id: 'siswa-berprestasi',
+    title: 'Piagam Siswa Berprestasi HUT RI ke-78',
+    issuer: 'SMK Raden Umar Said Kudus',
+    date: 'Aug 2023',
+    image: '/cert-siswa-berprestasi.jpg',
+    accent: '#B91D47',
+    gridSpan: 'md:col-span-1 lg:col-span-6',
+  },
+  {
+    id: 'it-knowledge-ipb',
+    title: 'IT Knowledge Committee (UI/UX)',
+    issuer: 'Himavo Micro IT · IPB University',
+    date: 'Jun 2025',
+    image: '/cert-it-knowledge.jpg',
+    accent: '#008272',
+    gridSpan: 'md:col-span-1 lg:col-span-6',
+  },
+  {
+    id: 'lumos-html',
+    title: 'HTML Certification',
+    issuer: 'Lumos Learning',
+    date: 'Dec 2021',
+    image: '/cert-lumos-html.png',
+    accent: '#2563EB',
+    gridSpan: 'md:col-span-1 lg:col-span-6',
+  },
+  {
+    id: 'sololearn-python',
+    title: 'Python Intermediate',
+    issuer: 'SoloLearn',
+    date: 'Aug 2024',
+    image: '/cert-sololearn-python.jpg',
+    accent: '#D97706',
+    gridSpan: 'md:col-span-1 lg:col-span-4',
+  },
+  {
+    id: 'exabytes-pm',
+    title: 'Basic Principle of Product Management',
+    issuer: 'Exabytes Developer Club',
+    date: 'Feb 2023',
+    image: '/cert-exabytes-pm.jpg',
+    accent: '#0284C7',
+    gridSpan: 'md:col-span-1 lg:col-span-4',
+  },
+  {
+    id: 'sololearn-csharp',
+    title: 'C# Course Certificate',
+    issuer: 'SoloLearn',
+    date: 'Oct 2022',
+    image: '/cert-sololearn-csharp.png',
+    accent: '#6D28D9',
+    gridSpan: 'md:col-span-1 lg:col-span-4',
+  },
+  {
+    id: 'sql-greatlearning',
+    title: 'SQL Projects for Beginners',
+    issuer: 'Great Learning Academy',
+    date: 'Oct 2022',
+    image: '/cert-sql-greatlearning.png',
+    accent: '#2563EB',
+    gridSpan: 'md:col-span-1 lg:col-span-3',
+  },
+  {
+    id: 'greatlearning-java',
+    title: 'Java Programming',
+    issuer: 'Great Learning Academy',
+    date: 'Oct 2022',
+    image: '/cert-greatlearning-java.png',
+    accent: '#EA580C',
+    gridSpan: 'md:col-span-1 lg:col-span-3',
+  },
+  {
+    id: 'greatlearning-python',
+    title: 'Python Fundamentals for Beginners',
+    issuer: 'Great Learning Academy',
+    date: 'Oct 2022',
+    image: '/cert-greatlearning-python.png',
+    accent: '#10B981',
+    gridSpan: 'md:col-span-1 lg:col-span-3',
+  },
+  {
+    id: 'greatlearning-css',
+    title: 'Front End Development - CSS',
+    issuer: 'Great Learning Academy',
+    date: 'Oct 2022',
+    image: '/cert-greatlearning-css.png',
+    accent: '#4F46E5',
+    gridSpan: 'md:col-span-1 lg:col-span-3',
+  },
+];
+
 const FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'work', label: 'Work' },
   { id: 'awards', label: 'Awards' },
   { id: 'organizations', label: 'Organizations' },
+  { id: 'certificates', label: 'Certificates' },
 ];
 
 export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [selectedCert, setSelectedCert] = useState(null);
   const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!selectedCert) return undefined;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedCert(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [selectedCert]);
 
   const countFor = (id) =>
     id === 'all'
       ? ACTIVITIES_DATA.length
-      : ACTIVITIES_DATA.filter((item) => item.category === id).length;
+      : id === 'certificates'
+        ? CERTIFICATES_DATA.length
+        : ACTIVITIES_DATA.filter((item) => item.category === id).length;
 
   const filteredActivities =
     activeFilter === 'all'
@@ -134,7 +303,7 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
       : ACTIVITIES_DATA.filter((item) => item.category === activeFilter);
 
   return (
-    <main className="max-w-6xl mx-auto px-6 sm:px-10 pt-10 sm:pt-14 pb-20">
+    <main className="max-w-6xl mx-auto px-4 sm:px-10 pt-6 sm:pt-14 pb-14 sm:pb-20">
       {/* Top Navigation Row */}
       <div className="flex items-center justify-between gap-4 pb-6 mb-10 border-b border-[#E2E8F0]">
         <Button onClick={onBackToHome} className="group min-h-[44px]">
@@ -145,10 +314,6 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
           />
           <span>Back to home</span>
         </Button>
-
-        <span className="font-mono text-xs uppercase tracking-wider text-[#64748B]">
-          Archive · {ACTIVITIES_DATA.length} Records
-        </span>
       </div>
 
       {/* Metro Editorial Header */}
@@ -173,7 +338,7 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
       <div
         role="tablist"
         aria-label="Highlight categories"
-        className="flex flex-wrap items-baseline gap-6 sm:gap-8 border-b border-[#E2E8F0] mb-8"
+        className="flex flex-wrap items-baseline gap-x-5 gap-y-1 sm:gap-8 border-b border-[#E2E8F0] mb-8"
       >
         {FILTERS.map((f) => {
           const isActive = activeFilter === f.id;
@@ -184,7 +349,7 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
               role="tab"
               aria-selected={isActive}
               onClick={() => setActiveFilter(f.id)}
-              className={`pb-3 -mb-[1px] font-metro text-xl sm:text-2xl font-light transition-colors cursor-pointer inline-flex items-baseline gap-2 border-b-2 ${
+              className={`min-h-[44px] pb-3 -mb-[1px] font-metro text-lg sm:text-2xl font-light transition-colors cursor-pointer inline-flex items-baseline gap-2 border-b-2 ${
                 isActive
                   ? 'border-[#0078D7] text-[#0F172A] font-normal'
                   : 'border-transparent text-[#94A3B8] hover:text-[#475569]'
@@ -197,8 +362,50 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
         })}
       </div>
 
-      {/* Windows 8 Metro Tile Grid (Zero Dropdowns — All Info Scannable Directly) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Windows 8 Metro Tile Grid (Asymmetric Multi-Sized Bento Grid) */}
+      {activeFilter === 'certificates' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-stretch">
+          {CERTIFICATES_DATA.map((cert, idx) => (
+            <motion.button
+              key={cert.id}
+              type="button"
+              onClick={() => setSelectedCert(cert)}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: idx * 0.04 }}
+              style={{ borderTopColor: cert.accent }}
+              className={`group metro-tile ${cert.gridSpan} bg-white border border-[#CBD5E1] border-t-4 flex flex-col justify-between text-left cursor-pointer overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0078D7] shadow-sm hover:shadow-md transition-shadow`}
+            >
+              <div className="w-full flex-1 bg-[#F8FAFC] flex items-center justify-center overflow-hidden">
+                <img
+                  src={cert.image}
+                  alt={cert.title}
+                  className="w-full h-auto block group-hover:scale-[1.01] transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+
+              <div
+                style={{ backgroundColor: cert.accent }}
+                className="w-full px-4 py-2.5 sm:py-3 text-white flex items-center justify-between gap-3 shrink-0"
+              >
+                <div className="min-w-0">
+                  <h2 className="font-metro text-sm sm:text-base font-medium leading-tight truncate">
+                    {cert.title}
+                  </h2>
+                  <p className="font-mono text-[10px] sm:text-[11px] text-white/85 truncate">
+                    {cert.issuer}
+                  </p>
+                </div>
+                <span className="font-mono text-[10px] sm:text-[11px] bg-white/15 px-2.5 py-0.5 shrink-0">
+                  {cert.date}
+                </span>
+              </div>
+            </motion.button>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredActivities.map((item, idx) => {
           const meta = TYPE_META[item.category];
           const isFeaturedWork = item.category === 'work';
@@ -300,7 +507,48 @@ export default function ActivitiesPage({ onBackToHome, onOpenContact }) {
             </motion.article>
           );
         })}
-      </div>
+        </div>
+      )}
+
+      {/* Certificate Lightbox Modal */}
+      {selectedCert && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedCert.title}
+          onClick={() => setSelectedCert(null)}
+          className="fixed inset-0 z-50 bg-black/80 p-4 sm:p-8 flex items-center justify-center"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white border-t-4 border-t-[#0078D7] max-w-3xl w-full overflow-hidden shadow-2xl"
+          >
+            <div className="bg-[#0F172A] text-white px-5 py-3 flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <p className="font-metro text-base font-medium truncate">{selectedCert.title}</p>
+                <p className="font-mono text-[11px] text-[#CBD5E1] truncate">
+                  {selectedCert.issuer} · {selectedCert.date}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedCert(null)}
+                aria-label="Close certificate preview"
+                className="w-9 h-9 bg-white/10 hover:bg-[#0078D7] text-white flex items-center justify-center shrink-0 cursor-pointer transition-colors"
+              >
+                <X size={18} aria-hidden="true" />
+              </button>
+            </div>
+            <div className="bg-[#F8FAFC] p-3 sm:p-5 flex justify-center">
+              <img
+                src={selectedCert.image}
+                alt={selectedCert.title}
+                className="w-full h-auto max-h-[75vh] object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Bottom Metro CTA */}
       <motion.div
