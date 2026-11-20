@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
     ],
+    optimizeDeps: {
+      entries: ['index.html'],
+    },
     server: {
       proxy: {
         '/ml-api': {

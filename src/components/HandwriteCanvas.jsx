@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import Button from './Button';
 
 export default function HandwriteCanvas({ onPredict, isLoading = false }) {
   const canvasRef = useRef(null);
@@ -92,23 +93,23 @@ export default function HandwriteCanvas({ onPredict, isLoading = false }) {
         />
       </div>
 
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          disabled={!hasDrawn || isLoading}
-          className="win98-raised px-4 py-1.5 text-xs font-bold text-[#111827] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isLoading ? 'Predicting...' : 'Predict Digit'}
-        </button>
-        <button
+      <div className="flex flex-wrap items-center gap-3">
+        <Button
           type="button"
           onClick={resetCanvas}
           disabled={isLoading}
-          className="win98-raised px-3.5 py-1.5 text-xs font-bold text-[#111827] cursor-pointer disabled:opacity-50"
+          className="text-[#4B5563] hover:text-[#991B1B] hover:bg-[#FEE2E2]"
         >
           Clear Canvas
-        </button>
+        </Button>
+        <Button
+          type="button"
+          variant="primary"
+          onClick={handleSubmit}
+          disabled={!hasDrawn || isLoading}
+        >
+          {isLoading ? 'Predicting...' : 'Predict Digit'}
+        </Button>
       </div>
     </div>
   );

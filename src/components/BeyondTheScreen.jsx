@@ -1,139 +1,241 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { ArrowRight, Award, Briefcase, Users } from 'lucide-react';
-import { Win98WindowControls } from './RetroStickers';
+import { motion, useReducedMotion } from 'motion/react';
+import { ArrowRight, Award, Briefcase, Code2, Globe, Sparkles, Trophy, Users } from 'lucide-react';
+import Button from './Button';
 
 export default function BeyondTheScreen({ onViewActivities }) {
-  const experiences = [
-    {
-      role: 'Backend Developer Intern',
-      org: 'PT Teknologi Kartu Indonesia',
-      period: '2023 – 2024',
-      iconBg: '#DBEAFE',
-      icon: <Briefcase size={18} className="text-[#000080]" />,
-      summary:
-        'Engineered and maintained scalable backend services and RESTful APIs using FastAPI and MongoDB.',
-    },
-    {
-      role: 'Honors & Awards',
-      org: 'National & International',
-      period: '2023 – 2025',
-      iconBg: '#FEF3C7',
-      icon: <Award size={18} className="text-[#000080]" />,
-      summary:
-        'Best International Essay (Jombang), 2nd Place Web Design PRISMA Festival & LKS Kudus, and Honorable Mention at Garuda Hacks 4.0.',
-    },
-    {
-      role: 'Organizations & Events',
-      org: 'IPB University · GDGoC · DevFest',
-      period: '2024 – 2026',
-      iconBg: '#DCFCE7',
-      icon: <Users size={18} className="text-[#000080]" />,
-      summary:
-        'IT Knowledge Judge & Treasurer, MICRO IT SHN Treasurer, Head of Medical Division, GDGoC IPB Member, and DevFest Bogor Participant.',
-    },
-  ];
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
       id="experience"
-      className="py-20 px-6 sm:px-10 bg-[#008080] border-t-2 border-white scroll-mt-4 relative overflow-hidden"
+      className="py-20 px-6 sm:px-10 bg-white border-t border-[#E2E8F0] text-[#0F172A] scroll-mt-16"
     >
-      <div className="max-w-5xl mx-auto relative">
-        {/* Centered Header */}
+      <div className="max-w-6xl mx-auto">
+        {/* Editorial Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.4 }}
-          className="text-center max-w-xl mx-auto mb-12"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
         >
-          <span className="inline-block win98-raised px-3 py-0.5 text-[10.5px] font-mono font-bold tracking-wider text-[#111827] uppercase mb-4">
-            Experience
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white drop-shadow-[2px_2px_0px_#004040] mb-2.5">
-            Experience & Highlights.
-          </h2>
-          <p className="text-sm sm:text-base text-[#E6FFFA] font-normal mb-5">
-            Work experience, honors &amp; awards, organizations, and tech events.
-          </p>
-          <button
-            onClick={onViewActivities}
-            className="win98-raised hover:bg-[#FEF08A] px-4 py-1.5 inline-flex items-center gap-1.5 text-xs font-semibold text-[#111827] transition-colors group cursor-pointer"
-          >
-            View full highlights
-            <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-          </button>
+          <div className="max-w-2xl">
+            <span className="inline-block bg-[#0F172A] text-white px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase mb-3">
+              03 / Experience &amp; Honors
+            </span>
+            <h2 className="font-metro text-3xl sm:text-4xl font-light tracking-tight text-[#0F172A] mb-2">
+              Track record beyond the code.
+            </h2>
+            <p className="text-sm sm:text-base text-[#475569] font-normal">
+              Industry backend internship, international &amp; national awards, and campus leadership.
+            </p>
+          </div>
+
+          <Button onClick={onViewActivities} className="group self-start md:self-auto shrink-0 min-h-[44px]">
+            Explore full archive (10)
+            <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+          </Button>
         </motion.div>
 
-        {/* 3-Column Win98 Window Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {experiences.map((item, idx) => (
-            <motion.div
-              key={item.role}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  onViewActivities?.();
-                }
-              }}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: idx * 0.08 }}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.99 }}
-              onClick={onViewActivities}
-              className="group win98-window p-1 flex flex-col cursor-pointer text-left"
-            >
-              {/* Title Bar */}
-              <div className="win98-titlebar px-2.5 py-1 flex items-center justify-between gap-2 mb-1">
-                <span className="text-[10.5px] font-mono font-semibold truncate">
-                  {item.org}
+        {/* Windows 8 Metro Multi-Sized Tile Grid (2x2, 2x1, 1x1) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 lg:auto-rows-[168px]">
+          {/* Large 2x2 Tile: Backend Intern */}
+          <motion.button
+            type="button"
+            onClick={onViewActivities}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35 }}
+            className="metro-tile md:col-span-2 lg:row-span-2 bg-[#0078D7] hover:bg-[#0063B1] text-white p-6 sm:p-7 flex flex-col justify-between text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
+          >
+            <div className="flex items-start justify-between gap-4 w-full">
+              <div className="w-11 h-11 bg-white/15 flex items-center justify-center shrink-0">
+                <Briefcase size={22} className="text-white" aria-hidden="true" />
+              </div>
+              <span className="font-metro text-[11px] font-semibold uppercase tracking-[0.14em] text-white/90 bg-white/15 px-2.5 py-1">
+                2023 – 2024
+              </span>
+            </div>
+
+            <div className="my-6 lg:my-0">
+              <span className="block font-metro text-xs uppercase tracking-[0.12em] text-white/85 mb-1.5">
+                PT Teknologi Kartu Indonesia
+              </span>
+              <h3 className="font-metro text-2xl sm:text-3xl font-light tracking-tight text-white mb-3">
+                Backend Developer Intern
+              </h3>
+              <p className="text-sm text-white/90 leading-relaxed max-w-md">
+                Engineered and maintained scalable backend services and RESTful APIs using FastAPI and MongoDB.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/20 w-full">
+              <span className="font-mono text-[11px] text-white/90">
+                FastAPI · MongoDB · REST APIs
+              </span>
+              <span className="inline-flex items-center gap-1.5 font-metro text-xs font-semibold uppercase tracking-wider text-white">
+                Details
+                <ArrowRight size={14} aria-hidden="true" />
+              </span>
+            </div>
+          </motion.button>
+
+          {/* Wide 2x1 Tile: Campus & Community */}
+          <motion.button
+            type="button"
+            onClick={onViewActivities}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35, delay: 0.05 }}
+            className="metro-tile md:col-span-2 bg-[#0F172A] hover:bg-[#1E293B] text-white p-5 sm:p-6 flex flex-col justify-between text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0078D7]"
+          >
+            <div className="flex items-center justify-between gap-3 w-full">
+              <div className="inline-flex items-center gap-2">
+                <Users size={18} className="text-[#38BDF8]" aria-hidden="true" />
+                <span className="font-metro text-[11px] font-semibold uppercase tracking-[0.14em] text-[#CBD5E1]">
+                  Organizations &amp; Events
                 </span>
-                <Win98WindowControls />
               </div>
+              <span className="font-metro text-[11px] text-[#94A3B8]">2024 – 2026</span>
+            </div>
 
-              {/* Sunken Body */}
-              <div className="bg-[#FAF8F2] win98-sunken p-5 sm:p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between gap-3 mb-5">
-                    <div
-                      style={{ backgroundColor: item.iconBg }}
-                      className="w-10 h-10 win98-sunken flex items-center justify-center shrink-0"
-                    >
-                      {item.logo ? (
-                        <img
-                          src={item.logo}
-                          alt={item.org}
-                          className="w-6 h-6 object-contain"
-                        />
-                      ) : (
-                        item.icon
-                      )}
-                    </div>
-                    <span className="win98-raised px-2 py-0.5 text-[10.5px] font-mono font-medium text-[#111827]">
-                      {item.period}
-                    </span>
-                  </div>
+            <div>
+              <h3 className="font-metro text-xl font-normal text-white mb-1">
+                IPB University · GDGoC · DevFest Bogor
+              </h3>
+              <p className="text-xs text-[#CBD5E1] leading-relaxed">
+                IT Knowledge Judge &amp; Treasurer · MICRO IT SHN Treasurer · Head of Medical Division
+              </p>
+            </div>
+          </motion.button>
 
-                  <h3 className="font-display text-lg font-bold text-[#111827] tracking-tight mb-2 group-hover:text-[#000080] transition-colors">
-                    {item.role}
-                  </h3>
-                  <p className="text-xs sm:text-[13px] text-[#374151] leading-relaxed font-normal">
-                    {item.summary}
-                  </p>
-                </div>
+          {/* Medium 1x1 Tile: Best International Essay */}
+          <motion.button
+            type="button"
+            onClick={onViewActivities}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35, delay: 0.1 }}
+            className="metro-tile bg-[#008272] hover:bg-[#006B5E] text-white p-5 flex flex-col justify-between text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
+          >
+            <div className="flex items-center justify-between gap-2 w-full">
+              <Globe size={18} className="text-white/90" aria-hidden="true" />
+              <span className="font-metro text-[10px] font-semibold uppercase tracking-[0.14em] text-white/85">
+                International
+              </span>
+            </div>
+            <div>
+              <h3 className="font-metro text-lg font-medium leading-snug text-white">
+                Best International Essay
+              </h3>
+              <p className="mt-1 text-xs text-white/85">Jombang 19th Dies Natalis</p>
+            </div>
+          </motion.button>
 
-                <div className="pt-4 mt-5 border-t border-[#D1D5DB] inline-flex items-center gap-1.5 text-xs font-semibold text-[#111827] group-hover:text-[#000080] transition-colors">
-                  Read highlight
-                  <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-                </div>
+          {/* Medium 1x1 Tile: Garuda Hacks 4.0 */}
+          <motion.button
+            type="button"
+            onClick={onViewActivities}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35, delay: 0.15 }}
+            className="metro-tile bg-[#5133AB] hover:bg-[#41288E] text-white p-5 flex flex-col justify-between text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
+          >
+            <div className="flex items-center justify-between gap-2 w-full">
+              <Sparkles size={18} className="text-white/90" aria-hidden="true" />
+              <span className="font-metro text-[10px] font-semibold uppercase tracking-[0.14em] text-white/85">
+                Hackathon
+              </span>
+            </div>
+            <div>
+              <h3 className="font-metro text-lg font-medium leading-snug text-white">
+                Honorable Mention
+              </h3>
+              <p className="mt-1 text-xs text-white/85">Garuda Hacks 4.0</p>
+            </div>
+          </motion.button>
+
+          {/* Medium 1x1 Tile: PRISMA Festival */}
+          <motion.button
+            type="button"
+            onClick={onViewActivities}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35, delay: 0.2 }}
+            className="metro-tile bg-[#B91D47] hover:bg-[#99173B] text-white p-5 flex flex-col justify-between text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
+          >
+            <div className="flex items-center justify-between gap-2 w-full">
+              <Trophy size={18} className="text-white/90" aria-hidden="true" />
+              <span className="font-metro text-[10px] font-semibold uppercase tracking-[0.14em] text-white/85">
+                2025 · National
+              </span>
+            </div>
+            <div>
+              <h3 className="font-metro text-lg font-medium leading-snug text-white">
+                2nd Place Web Design
+              </h3>
+              <p className="mt-1 text-xs text-white/85">PRISMA Festival</p>
+            </div>
+          </motion.button>
+
+          {/* Medium 1x1 Tile: LKS Kudus */}
+          <motion.button
+            type="button"
+            onClick={onViewActivities}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35, delay: 0.25 }}
+            className="metro-tile bg-[#C2410C] hover:bg-[#9A3412] text-white p-5 flex flex-col justify-between text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F172A]"
+          >
+            <div className="flex items-center justify-between gap-2 w-full">
+              <Code2 size={18} className="text-white/90" aria-hidden="true" />
+              <span className="font-metro text-[10px] font-semibold uppercase tracking-[0.14em] text-white/85">
+                Web Tech
+              </span>
+            </div>
+            <div>
+              <h3 className="font-metro text-lg font-medium leading-snug text-white">
+                2nd Place Web Tech
+              </h3>
+              <p className="mt-1 text-xs text-white/85">LKS Kudus Regency</p>
+            </div>
+          </motion.button>
+
+          {/* Wide 2x1 Tile: Full Archive CTA */}
+          <motion.button
+            type="button"
+            onClick={onViewActivities}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.35, delay: 0.3 }}
+            className="metro-tile md:col-span-2 bg-[#F8FAFC] hover:bg-[#EFF6FF] border border-[#CBD5E1] hover:border-[#0078D7] text-[#0F172A] p-5 sm:p-6 flex items-center justify-between gap-4 text-left cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0078D7]"
+          >
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 bg-[#0078D7] text-white flex items-center justify-center shrink-0">
+                <Award size={20} aria-hidden="true" />
               </div>
-            </motion.div>
-          ))}
+              <div>
+                <span className="block font-metro text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0078D7] mb-1">
+                  Complete Record · 10 Entries
+                </span>
+                <h3 className="font-metro text-lg sm:text-xl font-medium text-[#0F172A]">
+                  Open full experience &amp; honors archive
+                </h3>
+                <p className="mt-0.5 text-xs text-[#475569]">
+                  Filter by work experience, competition awards, and campus organizations.
+                </p>
+              </div>
+            </div>
+            <ArrowRight size={20} className="text-[#0078D7] shrink-0" aria-hidden="true" />
+          </motion.button>
         </div>
       </div>
     </section>

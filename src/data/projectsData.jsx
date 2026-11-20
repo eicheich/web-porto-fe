@@ -14,21 +14,24 @@ const sevenGrid = [
 
 export const mlProjectsData = [
   {
-    id: 'reading-between-the-words',
-    category: 'NLP · Scikit-Learn',
-    title: 'Reading between the words.',
-    description: 'Predicting sentence mood from short text inputs.',
+    id: 'fraud-detection',
+    category: 'Tabular · Fraud Detection',
+    title: 'Card fraud detection.',
+    description: 'Real-time credit & debit card risk scoring across 24 transaction signals.',
     ctaLabel: 'View demo',
-    stageBg: '#DBEAFE',
+    stageBg: '#F1F5F9',
     preview: (
-      <div className="w-full flex flex-col items-center justify-center text-center gap-2">
-        <div className="w-full bg-white border border-[#111827] px-2.5 py-2 shadow-[2px_2px_0px_#808080]">
-          <p className="text-[11px] text-[#111827] font-mono italic truncate">
-            "I'm glad I gave it a try."
-          </p>
+      <div className="w-full bg-white border border-[#CBD5E1] border-t-4 border-t-[#DC2626] px-3.5 py-2.5 flex flex-col items-start gap-1.5 text-left">
+        <div className="flex items-center justify-between w-full gap-2">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#64748B]">
+            Risk Score
+          </span>
+          <span className="px-2 py-0.5 bg-[#DC2626] text-white text-[10px] font-metro font-semibold uppercase tracking-wider">
+            Flagged
+          </span>
         </div>
-        <span className="inline-block px-3 py-0.5 bg-[#000080] text-white text-[10.5px] font-mono font-semibold">
-          Positive
+        <span className="text-xs font-mono font-medium text-[#0F172A]">
+          $9,500 · Crypto · VPN
         </span>
       </div>
     ),
@@ -36,13 +39,13 @@ export const mlProjectsData = [
   {
     id: 'what-does-a-seven-look-like',
     category: 'Vision · PyTorch',
-    title: 'What does a seven look like?',
+    title: 'Handwritten digit recognizer.',
     description: 'Recognizing handwritten digits on an 8×8 pixel grid.',
     ctaLabel: 'View demo',
-    stageBg: '#FEF3C7',
+    stageBg: '#EFF6FF',
     preview: (
       <div className="flex items-center justify-center gap-3">
-        <div className="p-1.5 bg-white border border-[#111827] shadow-[2px_2px_0px_#808080]">
+        <div className="p-1.5 bg-white border border-[#CBD5E1]">
           <div className="grid grid-cols-8 gap-0.5 w-11 h-11">
             {sevenGrid.flat().map((pixel, i) => (
               <div
@@ -50,15 +53,15 @@ export const mlProjectsData = [
                 style={{ transitionDelay: pixel ? `${(i % 12) * 16}ms` : '0ms' }}
                 className={`w-full h-full transition-colors duration-300 ${
                   pixel
-                    ? 'bg-[#000080] group-hover:bg-[#1084D0]'
-                    : 'bg-[#E5E7EB]'
+                    ? 'bg-[#0078D7] group-hover:bg-[#005A9E]'
+                    : 'bg-[#E2E8F0]'
                 }`}
               />
             ))}
           </div>
         </div>
-        <ArrowRight size={14} className="text-[#111827] shrink-0 group-hover:translate-x-0.5 transition-transform" />
-        <span className="font-display text-2xl font-bold text-[#111827] tracking-tight">
+        <ArrowRight size={14} className="text-[#0F172A] shrink-0 group-hover:translate-x-0.5 transition-transform" />
+        <span className="font-metro text-3xl font-light text-[#0F172A] tracking-tight">
           7
         </span>
       </div>
@@ -70,20 +73,25 @@ export const mlProjectsData = [
     title: 'Cat or dog?',
     description: 'Binary image classifier telling cats and dogs apart.',
     ctaLabel: 'View demo',
-    stageBg: '#FFEDD5',
+    stageBg: '#F8FAFC',
     preview: (
       <div className="flex items-center justify-center gap-3">
-        <div className="w-14 h-14 overflow-hidden border-2 border-[#111827] bg-white shadow-[2px_2px_0px_#808080] shrink-0 group-hover:scale-103 transition-transform duration-300">
+        <div className="w-14 h-14 overflow-hidden border border-[#CBD5E1] bg-white shrink-0 group-hover:scale-103 transition-transform duration-300">
           <img
             src="/cat.jpg"
             alt="Cat"
             className="w-full h-full object-cover"
           />
         </div>
-        <ArrowRight size={14} className="text-[#111827] shrink-0 group-hover:translate-x-0.5 transition-transform" />
-        <span className="font-display text-xl font-bold text-[#111827] tracking-tight">
-          Cat.
-        </span>
+        <ArrowRight size={14} className="text-[#0F172A] shrink-0 group-hover:translate-x-0.5 transition-transform" />
+        <div className="text-left">
+          <span className="block font-metro text-lg font-medium text-[#0F172A] leading-none">
+            Cat
+          </span>
+          <span className="inline-block mt-1 px-1.5 py-0.5 bg-[#0078D7] text-white font-mono text-[9px] font-semibold">
+            98%
+          </span>
+        </div>
       </div>
     ),
   },
@@ -93,64 +101,18 @@ export const mlProjectsData = [
     title: 'House price estimator.',
     description: 'Estimating property prices from floor area and rooms.',
     ctaLabel: 'View demo',
-    stageBg: '#DCFCE7',
+    stageBg: '#ECFDF5',
     preview: (
-      <div className="w-full bg-white border border-[#111827] px-3 py-2 shadow-[2px_2px_0px_#808080] flex flex-col items-center justify-center text-center gap-1">
-        <span className="text-[10px] font-mono font-medium text-[#4B5563]">
+      <div className="w-full bg-white border border-[#CBD5E1] border-t-4 border-t-[#008272] px-3.5 py-2.5 flex flex-col items-start text-left gap-1">
+        <span className="text-[10px] font-mono text-[#64748B]">
           120 m² · 3B / 2Ba
         </span>
-        <span className="inline-block font-display text-2xl font-bold text-[#000080] tracking-tight leading-none">
+        <span className="font-metro text-2xl font-light text-[#0F172A] tracking-tight leading-none">
           $245k
         </span>
-        <span className="text-[9.5px] font-mono text-[#6B7280] uppercase">Est. value</span>
-      </div>
-    ),
-  },
-  {
-    id: 'a-second-look-at-spam',
-    category: 'NLP · Classification',
-    title: 'A second look at spam.',
-    description: 'Filtering promotional noise from legitimate messages.',
-    ctaLabel: 'View demo',
-    stageBg: '#DBEAFE',
-    preview: (
-      <div className="w-full flex flex-col items-center justify-center text-center gap-2">
-        <div className="w-full bg-white border border-[#111827] px-2.5 py-2 shadow-[2px_2px_0px_#808080]">
-          <p className="text-[11px] text-[#111827] font-mono italic truncate">
-            "Claim your reward today!"
-          </p>
-        </div>
-        <span className="inline-block px-3 py-0.5 bg-[#111827] text-white text-[10.5px] font-mono font-semibold">
-          Likely spam
+        <span className="text-[9.5px] font-mono text-[#008272] uppercase tracking-wider">
+          Est. value
         </span>
-      </div>
-    ),
-  },
-  {
-    id: 'patterns-hiding-in-plain-sight',
-    category: 'Clustering · Unsupervised',
-    title: 'Patterns hiding in plain sight.',
-    description: 'Grouping similar articles without predefined labels.',
-    ctaLabel: 'View demo',
-    stageBg: '#FEF3C7',
-    preview: (
-      <div className="w-full grid grid-cols-3 gap-1.5">
-        {['Group A', 'Group B', 'Group C'].map((group, i) => (
-          <div
-            key={group}
-            className="bg-white border border-[#111827] py-2 px-1 text-center shadow-[1px_1px_0px_#808080]"
-          >
-            <div
-              className={`w-2 h-2 mx-auto mb-1 ${
-                i === 0 ? 'bg-[#000080]' : i === 1 ? 'bg-[#DC2626]' : 'bg-[#16A34A]'
-              }`}
-            />
-            <div className="text-[9px] font-bold text-[#111827]">{group}</div>
-            <div className="text-[8px] font-mono text-[#4B5563] mt-0.5">
-              {i === 0 ? 'Short' : i === 1 ? 'Deep' : 'Guides'}
-            </div>
-          </div>
-        ))}
       </div>
     ),
   },
@@ -163,34 +125,16 @@ export const softwareProjectsData = [
     title: 'Unravel',
     description: 'Learn structured case analysis through interactive learning paths and community discussions.',
     ctaLabel: 'View case study',
-    stageBg: '#DCFCE7',
+    stageBg: '#E2E8F0',
     preview: (
-      <div className="w-full bg-white border border-[#111827] p-1.5 shadow-[2px_2px_0px_#808080]">
-        <div className="bg-[#000080] text-white text-[8px] font-mono px-1.5 py-0.5 mb-1.5 flex justify-between">
-          <span>unravel-prod.vercel.app</span>
-          <span>×</span>
+      <div className="w-full bg-white border border-[#CBD5E1] overflow-hidden">
+        <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[#475569] text-[8px] font-mono px-2 py-0.5 truncate">
+          unravel-prod.vercel.app
         </div>
         <img
           src="/unravel.jpg"
           alt="Unravel web app preview"
-          className="w-full h-24 object-cover object-top border border-[#111827]/15"
-        />
-      </div>
-    ),
-  },
-  {
-    id: 'ufee',
-    category: 'Mobile App · Flutter',
-    title: 'UFee',
-    description: 'Flutter sneaker store app with an editorial catalog and All, Men, Women categories.',
-    ctaLabel: 'View case study',
-    stageBg: '#F3F4F6',
-    preview: (
-      <div className="w-20 bg-white border-2 border-[#111827] p-1 shadow-[2px_2px_0px_#808080]">
-        <img
-          src="/ufee.jpg"
-          alt="UFee Flutter mobile app preview"
-          className="w-full h-24 object-cover object-center"
+          className="w-full h-auto block"
         />
       </div>
     ),
@@ -201,13 +145,113 @@ export const softwareProjectsData = [
     title: 'HijauKita',
     description: 'Sustainability app and Garuda Hacks 4.0 International Hackathon winner featuring BuGuru AI.',
     ctaLabel: 'View case study',
-    stageBg: '#DCFCE7',
+    stageBg: '#0B1120',
     preview: (
-      <div className="w-20 bg-white border-2 border-[#111827] p-1 shadow-[2px_2px_0px_#808080]">
+      <div className="w-32 sm:w-36 bg-[#1E293B] border border-[#334155] p-1.5">
         <img
           src="/hijaukita.jpg"
           alt="HijauKita Flutter mobile app preview"
-          className="w-full h-24 object-cover object-top"
+          className="w-full h-auto max-h-60 object-contain"
+        />
+      </div>
+    ),
+  },
+  {
+    id: 'devco',
+    category: 'Web Application · Social Platform · 2022',
+    title: 'DevCo',
+    description: 'A social platform with a post feed, profile discovery, and community interactions.',
+    ctaLabel: 'View case study',
+    stageBg: '#E2E8F0',
+    preview: (
+      <div className="w-full bg-white border border-[#CBD5E1] overflow-hidden">
+        <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[#475569] text-[8px] font-mono px-2 py-0.5 truncate">
+          devco.houselab.my.id
+        </div>
+        <img
+          src="/devco.png"
+          alt="DevCo social platform preview"
+          className="w-full h-auto block"
+        />
+      </div>
+    ),
+  },
+  {
+    id: 'tasku',
+    category: 'Web Application · Multi-Platform Broadcast',
+    title: 'Tasku',
+    description: 'Team information control hub that broadcasts announcements simultaneously to WhatsApp, Discord, and Telegram.',
+    ctaLabel: 'View case study',
+    stageBg: '#E2E8F0',
+    preview: (
+      <div className="w-full bg-white border border-[#CBD5E1] overflow-hidden">
+        <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[#475569] text-[8px] font-mono px-2 py-0.5 truncate">
+          tasku.site
+        </div>
+        <img
+          src="/tasku.png"
+          alt="Tasku multi-platform team broadcast preview"
+          className="w-full h-auto block"
+        />
+      </div>
+    ),
+  },
+  {
+    id: 'pinggir-sawah-iboe',
+    category: 'Web Application · Culinary & Hospitality',
+    title: 'Pinggir Sawah Iboe',
+    description: 'Editorial web presence for a riverside restaurant and fishing park featuring menu showcase, articles, and direct WhatsApp booking.',
+    ctaLabel: 'View case study',
+    stageBg: '#E2E8F0',
+    preview: (
+      <div className="w-full bg-white border border-[#CBD5E1] overflow-hidden">
+        <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[#475569] text-[8px] font-mono px-2 py-0.5 truncate">
+          pasar-sawah-iboe.vercel.app
+        </div>
+        <img
+          src="/pinggir-sawah-iboe.jpg"
+          alt="Pinggir Sawah Iboe restaurant and fishing park website preview"
+          className="w-full h-auto block"
+        />
+      </div>
+    ),
+  },
+  {
+    id: 'langkah-baswara',
+    category: 'Web-GIS · Bali Travel & Itinerary',
+    title: 'Langkah Baswara',
+    description: 'Interactive Web-GIS platform for planning Bali trips with personalized itinerary generation and destination discovery.',
+    ctaLabel: 'View case study',
+    stageBg: '#E2E8F0',
+    preview: (
+      <div className="w-full bg-white border border-[#CBD5E1] overflow-hidden">
+        <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[#475569] text-[8px] font-mono px-2 py-0.5 truncate">
+          langkah-baswara-peach.vercel.app
+        </div>
+        <img
+          src="/langkah-baswara.jpg"
+          alt="Langkah Baswara interactive Web-GIS Bali travel planner preview"
+          className="w-full h-auto block"
+        />
+      </div>
+    ),
+  },
+  {
+    id: 'furai',
+    category: 'Web App · MediaPipe Posture & Study Space',
+    title: 'Furai',
+    description: 'In-browser MediaPipe webcam posture detector that catches slouching in real time alongside a Pomodoro study space.',
+    ctaLabel: 'View case study',
+    stageBg: '#E2E8F0',
+    preview: (
+      <div className="w-full bg-white border border-[#CBD5E1] overflow-hidden">
+        <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[#475569] text-[8px] font-mono px-2 py-0.5 truncate">
+          furai-green.vercel.app
+        </div>
+        <img
+          src="/furai.png"
+          alt="Furai MediaPipe posture detector and study space preview"
+          className="w-full h-auto block"
         />
       </div>
     ),

@@ -1,18 +1,12 @@
 import React from 'react';
 
-/* Classic Win98 Window Titlebar Mini Controls [_][□][×] */
+/* Clean Windows 8 Metro Header Geometric Accent */
 export function Win98WindowControls() {
   return (
     <div aria-hidden="true" className="flex items-center gap-1 shrink-0">
-      <span className="w-4 h-3.5 win98-raised flex items-center justify-center text-[9px] font-bold text-[#111827] leading-none">
-        _
-      </span>
-      <span className="w-4 h-3.5 win98-raised flex items-center justify-center text-[9px] font-bold text-[#111827] leading-none">
-        □
-      </span>
-      <span className="w-4 h-3.5 win98-raised flex items-center justify-center text-[10px] font-bold text-[#111827] leading-none">
-        ×
-      </span>
+      <span className="w-2 h-2 bg-white/40" />
+      <span className="w-2 h-2 bg-white/70" />
+      <span className="w-2 h-2 bg-white" />
     </div>
   );
 }

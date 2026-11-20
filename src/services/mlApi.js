@@ -74,7 +74,7 @@ async function parseErrorResponse(response) {
   }
   if (status >= 500) {
     throw new ApiError(
-      'Something went wrong while processing your request. Please try again shortly.',
+      parsedDetail || 'Something went wrong while processing your request. Please try again shortly.',
       status,
       detail
     );
@@ -226,5 +226,113 @@ export function formatRupiah(value) {
     currency: 'IDR',
     maximumFractionDigits: 0,
   }).format(value);
+}
+
+/**
+ * E. Credit/Debit Card Fraud Detection (POST /predict-fraud)
+ */
+export function validateFraudInput(raw) {
+  const num = (v) => Number(v);
+  const amount = num(raw.amount_usd);
+  const customerAge = num(raw.customer_age);
+  const cardAgeMonths = num(raw.card_age_months);
+  const accountBalance = num(raw.account_balance_usd);
+  const priorDisputes = raw.prior_disputes === '' || raw.prior_disputes === undefined ? 0 : num(raw.prior_disputes);
+  const hoursSinceLast = num(raw.hours_since_last_txn);
+  const txnCount24h = num(raw.txn_count_last_24h);
+  const distanceKm = num(raw.distance_from_home_km);
+  const velocityScore = num(raw.velocity_score);
+  const timeOfDay = num(raw.time_of_day_hour);
+  const dayOfWeek = num(raw.day_of_week);
+  const merchantRisk = num(raw.merchant_risk_score);
+  const cvvRetry = raw.cvv_retry_count === '' || raw.cvv_retry_count === undefined ? 0 : num(raw.cvv_retry_count);
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    throw new ApiError('amount_usd: Transaction amount must be greater than 0.', 422);
+  }
+  const requiredStrings = [
+    ['merchant_category', raw.merchant_category],
+    ['card_type', raw.card_type],
+    ['auth_method', raw.auth_method],
+    ['channel', raw.channel],
+    ['device_type', raw.device_type],
+  ];
+  for (const [field, val] of requiredStrings) {
+    if (!val || typeof val !== 'string' || !val.trim()) {
+      throw new ApiError(`${field}: This field is required.`, 422);
+    }
+  }
+  if (!Number.isInteger(customerAge) || customerAge < 18 || customerAge > 120) {
+    throw new ApiError('customer_age: Must be a whole number between 18 and 120.', 422);
+  }
+  if (!Number.isInteger(cardAgeMonths) || cardAgeMonths < 0) {
+    throw new ApiError('card_age_months: Must be a whole number >= 0.', 422);
+  }
+  if (!Number.isFinite(accountBalance) || accountBalance < 0) {
+    throw new ApiError('account_balance_usd: Must be >= 0.', 422);
+  }
+  if (!Number.isInteger(priorDisputes) || priorDisputes < 0) {
+    throw new ApiError('prior_disputes: Must be a whole number >= 0.', 422);
+  }
+  if (!Number.isFinite(hoursSinceLast) || hoursSinceLast < 0) {
+    throw new ApiError('hours_since_last_txn: Must be >= 0.', 422);
+  }
+  if (!Number.isInteger(txnCount24h) || txnCount24h < 0) {
+    throw new ApiError('txn_count_last_24h: Must be a whole number >= 0.', 422);
+  }
+  if (!Number.isFinite(distanceKm) || distanceKm < 0) {
+    throw new ApiError('distance_from_home_km: Must be >= 0.', 422);
+  }
+  if (!Number.isFinite(velocityScore) || velocityScore < 0) {
+    throw new ApiError('velocity_score: Must be >= 0.', 422);
+  }
+  if (!Number.isInteger(timeOfDay) || timeOfDay < 0 || timeOfDay > 23) {
+    throw new ApiError('time_of_day_hour: Must be a whole number between 0 and 23.', 422);
+  }
+  if (!Number.isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6) {
+    throw new ApiError('day_of_week: Must be a whole number between 0 (Mon) and 6 (Sun).', 422);
+  }
+  if (!Number.isFinite(merchantRisk) || merchantRisk < 0 || merchantRisk > 100) {
+    throw new ApiError('merchant_risk_score: Must be between 0 and 100.', 422);
+  }
+  if (!Number.isInteger(cvvRetry) || cvvRetry < 0 || cvvRetry > 10) {
+    throw new ApiError('cvv_retry_count: Must be a whole number between 0 and 10.', 422);
+  }
+
+  return {
+    amount_usd: amount,
+    merchant_category: raw.merchant_category.trim(),
+    card_type: raw.card_type.trim(),
+    auth_method: raw.auth_method.trim(),
+    channel: raw.channel.trim(),
+    device_type: raw.device_type.trim(),
+    customer_age: customerAge,
+    card_age_months: cardAgeMonths,
+    account_balance_usd: accountBalance,
+    prior_disputes: priorDisputes,
+    hours_since_last_txn: hoursSinceLast,
+    txn_count_last_24h: txnCount24h,
+    distance_from_home_km: distanceKm,
+    velocity_score: velocityScore,
+    time_of_day_hour: timeOfDay,
+    day_of_week: dayOfWeek,
+    merchant_risk_score: merchantRisk,
+    cvv_retry_count: cvvRetry,
+    is_foreign_transaction: Boolean(raw.is_foreign_transaction),
+    is_new_merchant: Boolean(raw.is_new_merchant),
+    used_vpn: Boolean(raw.used_vpn),
+    ip_country_mismatch: Boolean(raw.ip_country_mismatch),
+    billing_shipping_mismatch: Boolean(raw.billing_shipping_mismatch),
+    is_ai_generated_scam_attempt: Boolean(raw.is_ai_generated_scam_attempt),
+  };
+}
+
+export async function predictFraud(rawInput) {
+  const payload = validateFraudInput(rawInput);
+  return fetchWithTimeout('/predict-fraud', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
 }
 

@@ -1,206 +1,253 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import {
-  Win98Wallpaper,
-  Win98WindowControls,
-  PixelFolderIcon,
-  PixelDocIcon,
-  PixelBinIcon,
-} from './RetroStickers';
+import { motion, useReducedMotion } from 'motion/react';
+import { ArrowUpRight, Check, Mail } from 'lucide-react';
+import Button from './Button';
 
-export default function Hero() {
-  const [waveKey, setWaveKey] = useState(0);
-  const [avatarHovered, setAvatarHovered] = useState(false);
+const CONTACT_EMAIL = 'husnulkhotimah@houselab.my.id';
 
-  const stackItems = ['Python', 'PyTorch', 'Scikit-Learn', 'React', 'Tailwind CSS', 'FastAPI'];
+const WINDOW_TILES = [
+  { id: 'tl', offsetClass: 'top-0 left-0', bg: 'from-[#00A4EF] to-[#0078D7]', delay: 0 },
+  { id: 'tr', offsetClass: 'top-0 -left-full', bg: 'from-[#0093E9] to-[#0078D7]', delay: 0.08 },
+  { id: 'bl', offsetClass: '-top-full left-0', bg: 'from-[#0078D7] to-[#0063B1]', delay: 0.16 },
+  { id: 'br', offsetClass: '-top-full -left-full', bg: 'from-[#0078D7] to-[#005A9E]', delay: 0.24 },
+];
+
+const CONFETTI_PIECES = [
+  { id: 0, x: -46, y: -54, rotate: -110, color: '#0078D7', size: 'w-2 h-2' },
+  { id: 1, x: -34, y: -70, rotate: 95, color: '#008272', size: 'w-2.5 h-1.5' },
+  { id: 2, x: -18, y: -82, rotate: -65, color: '#FFB900', size: 'w-2 h-2' },
+  { id: 3, x: -4, y: -76, rotate: 140, color: '#E81123', size: 'w-1.5 h-2.5' },
+  { id: 4, x: 14, y: -84, rotate: -130, color: '#5133AB', size: 'w-2 h-2' },
+  { id: 5, x: 30, y: -72, rotate: 75, color: '#38BDF8', size: 'w-2.5 h-1.5' },
+  { id: 6, x: 48, y: -56, rotate: 160, color: '#0078D7', size: 'w-2 h-2' },
+  { id: 7, x: -58, y: -28, rotate: -85, color: '#10B981', size: 'w-1.5 h-2' },
+  { id: 8, x: 56, y: -30, rotate: 115, color: '#FFB900', size: 'w-2 h-1.5' },
+  { id: 9, x: -42, y: -42, rotate: 45, color: '#E81123', size: 'w-1.5 h-1.5' },
+  { id: 10, x: 40, y: -44, rotate: -55, color: '#008272', size: 'w-2 h-2' },
+  { id: 11, x: 2, y: -92, rotate: 180, color: '#0078D7', size: 'w-2 h-1.5' },
+];
+
+export const Hero = () => {
+  const [copied, setCopied] = useState(false);
+  const [confettiBurst, setConfettiBurst] = useState(0);
+  const [isRevealed, setIsRevealed] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      setCopied(true);
+      setConfettiBurst((n) => n + 1);
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      window.location.href = `mailto:${CONTACT_EMAIL}`;
+    }
+  };
 
   return (
-    <section className="relative py-16 sm:py-24 px-4 sm:px-8 overflow-hidden min-h-[calc(100vh-48px)] flex items-center justify-center">
-      {/* 1998 Dithered Cyan Sky & Rolling Meadow Desktop Wallpaper */}
-      <Win98Wallpaper />
+    <section
+      id="top"
+      aria-labelledby="hero-heading"
+      className="bg-[#F8FAFC] border-b border-[#E2E8F0]"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left: Clean Windows 8 Metro editorial typography */}
+          <div className="lg:col-span-6">
+            <div className="inline-flex items-center gap-2.5 mb-5">
+              <span className="w-2.5 h-2.5 bg-[#0078D7]" aria-hidden="true" />
+              <span className="font-metro text-xs font-semibold uppercase tracking-[0.14em] text-[#475569]">
+                Software Engineering · IPB University
+              </span>
+            </div>
 
-      {/* Left Retro Desktop Icons (Desktop only) */}
-      <div className="hidden lg:flex flex-col gap-6 absolute left-7 top-8 z-10">
-        <a
-          href="#ml-projects"
-          className="group flex flex-col items-center gap-1 text-center w-18 p-1.5 rounded-xs hover:bg-[#000080]/35 transition-colors"
-        >
-          <PixelFolderIcon className="w-10 h-9 group-hover:scale-105 transition-transform" />
-          <span className="text-[11px] font-mono font-semibold text-white drop-shadow-[1px_1px_0px_#000000]">
-            ml_files
-          </span>
-        </a>
-
-        <a
-          href="#software"
-          className="group flex flex-col items-center gap-1 text-center w-18 p-1.5 rounded-xs hover:bg-[#000080]/35 transition-colors"
-        >
-          <div className="w-9 h-9 border-2 border-[#111827] bg-white p-0.5 shadow-[2px_2px_0px_#000000] group-hover:scale-105 transition-transform">
-            <img src="/profile.jpg" alt="" className="w-full h-full object-cover" />
-          </div>
-          <span className="text-[11px] font-mono font-semibold text-white drop-shadow-[1px_1px_0px_#000000]">
-            husnul.exe
-          </span>
-        </a>
-
-        <a
-          href="#experience"
-          className="group flex flex-col items-center gap-1 text-center w-18 p-1.5 rounded-xs hover:bg-[#000080]/35 transition-colors"
-        >
-          <PixelDocIcon className="w-9 h-10 group-hover:scale-105 transition-transform" />
-          <span className="text-[11px] font-mono font-semibold text-white drop-shadow-[1px_1px_0px_#000000]">
-            readme.txt
-          </span>
-        </a>
-      </div>
-
-      {/* Bottom-Left Desktop Recycle Bin */}
-      <div className="hidden lg:flex flex-col items-center gap-1 absolute left-8 bottom-8 z-10 opacity-90 pointer-events-none">
-        <PixelBinIcon className="w-9 h-10" />
-        <span className="text-[11px] font-mono font-semibold text-white drop-shadow-[1px_1px_0px_#000000]">
-          Recycle Bin
-        </span>
-      </div>
-
-      {/* Main Centered Win98 Window */}
-      <motion.div
-        initial={{ opacity: 0, y: 18, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-2xl win98-window p-1"
-      >
-        {/* Classic Blue Gradient Title Bar */}
-        <div className="win98-titlebar px-2.5 py-1.5 flex items-center justify-between gap-2 mb-1">
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="w-3.5 h-3.5 bg-[#FDE047] border border-[#111827] shrink-0" />
-            <span className="font-mono text-xs font-bold tracking-tight truncate">
-              husnul_portfolio.exe — Intro
-            </span>
-          </div>
-          <Win98WindowControls />
-        </div>
-
-        {/* Crisp Window Body */}
-        <div className="bg-[#FAF8F2] win98-sunken p-6 sm:p-10 text-center flex flex-col items-center">
-          {/* Profile Avatar + Retro Speech Bubble */}
-          <div
-            onMouseEnter={() => setAvatarHovered(true)}
-            onMouseLeave={() => setAvatarHovered(false)}
-            className="relative flex items-center justify-center gap-3.5 sm:block mb-6"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
-              className="w-20 h-20 win98-sunken p-1 bg-white cursor-pointer shrink-0"
+            <h1
+              id="hero-heading"
+              className="font-metro text-4xl sm:text-6xl font-light tracking-[-0.02em] text-[#0F172A] leading-[1.08]"
             >
-              <img
-                src="/profile.jpg"
-                alt="Husnul Khotimah"
-                className="w-full h-full object-cover object-center"
-              />
-            </motion.div>
+              Husnul Khotimah
+            </h1>
 
-            {/* Retro Speech Bubble */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, x: -6 }}
-              animate={
-                avatarHovered
-                  ? { opacity: 1, scale: 1.03, x: 2, y: -2 }
-                  : { opacity: 1, scale: 1, x: 0, y: 0 }
-              }
-              transition={{
-                opacity: { duration: 0.3, delay: 0.25 },
-                scale: { type: 'spring', stiffness: 360, damping: 20 },
-              }}
-              className="relative sm:absolute sm:left-[calc(100%+14px)] sm:-top-1 sm:w-max max-w-[185px] sm:max-w-[215px] bg-white border-2 border-[#111827] shadow-[3px_3px_0px_#111827] px-3 py-2 text-left select-none"
-            >
-              <span
-                aria-hidden="true"
-                className="hidden sm:block absolute -left-[7px] bottom-3 w-2.5 h-2.5 bg-white border-l-2 border-b-2 border-[#111827] rotate-45"
-              />
-              <p className="relative z-10 text-[11.5px] leading-snug text-[#111827] font-medium">
-                Still learning,{' '}
-                <span className="bg-[#FEF08A] px-1 font-bold text-[#000080]">
-                  especially about learning.
-                </span>
-              </p>
-            </motion.div>
-          </div>
+            <p className="mt-4 font-metro text-xl sm:text-2xl font-normal text-[#0078D7]">
+              Applied Machine Learning &amp; Full-Stack Software.
+            </p>
 
-          {/* University Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#DFDCD4] win98-raised mb-5">
-            <img
-              src="/logo-ipb.png"
-              alt="IPB University"
-              className="w-4 h-4 object-contain shrink-0"
-            />
-            <span className="text-[11px] font-mono font-semibold tracking-wide text-[#111827]">
-              Software Engineering · IPB University
-            </span>
-          </div>
+            <p className="mt-4 text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl">
+              I build interactive ML models, scalable backend APIs, and web &amp; mobile apps.
+            </p>
 
-          {/* Pixelated Editorial Headline */}
-          <h1
-            onMouseEnter={() => setWaveKey((k) => k + 1)}
-            className="font-display text-3xl sm:text-5xl font-bold text-[#111827] tracking-tight leading-[1.08] mb-4"
-          >
-            Husnul Khotimah
-            <motion.span
-              key={waveKey}
-              initial={{ rotate: 0 }}
-              animate={{ rotate: [0, 16, -8, 14, -4, 0] }}
-              transition={{ duration: 0.9, delay: waveKey === 0 ? 0.55 : 0, ease: 'easeInOut' }}
-              className="inline-block origin-[70%_75%] cursor-default select-none font-sans"
-              aria-hidden="true"
-            >
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Button
+                as="a"
+                href="#ml-projects"
+                variant="primary"
+                className="min-h-[44px]"
+              >
+                Explore projects
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </Button>
 
-            </motion.span>
-          </h1>
+              <Button
+                as="a"
+                href="#experience"
+                variant="secondary"
+                className="min-h-[44px]"
+              >
+                Experience
+              </Button>
 
-          {/* Concise Bio (Unchanged) */}
-          <p className="text-sm sm:text-base text-[#374151] max-w-lg leading-relaxed mb-7 font-normal">
-            Software Engineering student at IPB University focused on{' '}
-            <span className="bg-[#BFDBFE] px-1.5 py-0.5 text-[#111827] font-semibold">
-              Machine Learning
-            </span>{' '}
-            and{' '}
-            <span className="bg-[#BBF7D0] px-1.5 py-0.5 text-[#111827] font-semibold">
-              Software Development
-            </span>
-            —building models, web apps, and mobile products.
-          </p>
+              <div className="relative inline-flex items-center">
+                <Button
+                  type="button"
+                  variant="text"
+                  onClick={handleCopyEmail}
+                  className="min-h-[44px]"
+                  aria-label={`Copy email address ${CONTACT_EMAIL}`}
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-[#008272]" aria-hidden="true" />
+                      <span>Email copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Mail className="w-4 h-4" aria-hidden="true" />
+                      <span>Copy email</span>
+                    </>
+                  )}
+                </Button>
 
-          {/* Win98 Bevel Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3.5 mb-7">
-            <a
-              href="#ml-projects"
-              className="px-6 py-2 bg-[#000080] hover:bg-[#1084D0] text-white text-xs sm:text-sm font-semibold border-t-2 border-l-2 border-[#60A5FA] border-r-2 border-b-2 border-r-[#000040] border-b-[#000040] transition-colors"
-            >
-              View Projects
-            </a>
-            <a
-              href="#experience"
-              className="px-6 py-2 win98-raised hover:bg-[#EAE8E1] text-[#111827] text-xs sm:text-sm font-semibold transition-colors"
-            >
-              Experience
-            </a>
-          </div>
-
-          {/* Core Stack Strip */}
-          <div className="flex flex-wrap items-center justify-center gap-1.5 text-xs font-mono text-[#4B5563]">
-            {stackItems.map((item, idx) => (
-              <React.Fragment key={item}>
-                <span className="px-1.5 py-0.5 bg-[#DFDCD4]/70 border border-[#9CA3AF]/50 text-[#111827]">
-                  {item}
-                </span>
-                {idx < stackItems.length - 1 && (
-                  <span className="text-[#9CA3AF] select-none">·</span>
+                {!prefersReducedMotion && confettiBurst > 0 && (
+                  <div
+                    key={confettiBurst}
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-1/2 top-1/2 z-30"
+                  >
+                    {CONFETTI_PIECES.map((piece) => (
+                      <motion.span
+                        key={piece.id}
+                        initial={{ x: 0, y: 0, scale: 0.4, rotate: 0, opacity: 1 }}
+                        animate={{
+                          x: [0, piece.x * 0.75, piece.x],
+                          y: [0, piece.y, piece.y + 34],
+                          scale: [0.4, 1, 0.7],
+                          rotate: piece.rotate,
+                          opacity: [1, 1, 0],
+                        }}
+                        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ backgroundColor: piece.color }}
+                        className={`absolute block ${piece.size}`}
+                      />
+                    ))}
+                  </div>
                 )}
-              </React.Fragment>
-            ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Square Windows 8 3D Perspective Card — 4 Tiles Flip 1-by-1 & Merge into Portrait */}
+          <div className="lg:col-span-6 w-full max-w-[390px] mx-auto lg:ml-auto py-4">
+            <motion.button
+              type="button"
+              onClick={() => setIsRevealed((prev) => !prev)}
+              onMouseEnter={() => setIsRevealed(true)}
+              onMouseLeave={() => setIsRevealed(false)}
+              aria-expanded={isRevealed}
+              aria-label={
+                isRevealed
+                  ? 'Flip tiles back to Windows 8 window'
+                  : 'Flip Windows 8 tiles to reveal portrait'
+              }
+              initial={
+                prefersReducedMotion
+                  ? false
+                  : { opacity: 0, rotateY: -22, scale: 0.97 }
+              }
+              animate={{
+                opacity: 1,
+                rotateY: isRevealed ? -8 : -16,
+                scale: isRevealed ? 1.01 : 1,
+              }}
+              transition={{ duration: 0.45, ease: 'easeOut' }}
+              style={{
+                transformPerspective: 950,
+                transformStyle: 'preserve-3d',
+              }}
+              className="block w-full text-left bg-white border border-[#CBD5E1] overflow-hidden shadow-[14px_18px_36px_rgba(15,23,42,0.12)] cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0078D7]"
+            >
+              <motion.div
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : {
+                        gap: isRevealed ? '0px' : '10px',
+                        padding: isRevealed ? '0px' : '10px',
+                      }
+                }
+                transition={{
+                  duration: 0.42,
+                  delay: isRevealed ? 0.22 : 0,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                style={{
+                  gap: prefersReducedMotion ? '0px' : '10px',
+                  padding: prefersReducedMotion ? '0px' : '10px',
+                }}
+                className="relative aspect-square w-full bg-[#F8FAFC] grid grid-cols-2 grid-rows-2"
+              >
+                {WINDOW_TILES.map((tile) => (
+                  <motion.div
+                    key={tile.id}
+                    animate={
+                      prefersReducedMotion
+                        ? undefined
+                        : { rotateY: isRevealed ? 180 : 0 }
+                    }
+                    transition={{
+                      duration: 0.48,
+                      delay: isRevealed ? tile.delay : (0.24 - tile.delay) * 0.5,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    style={{
+                      transformPerspective: 700,
+                      transformStyle: 'preserve-3d',
+                    }}
+                    className="relative w-full h-full"
+                  >
+                    {/* Front: Windows 8 Blue Pane */}
+                    <div
+                      aria-hidden="true"
+                      style={{ backfaceVisibility: 'hidden' }}
+                      className={`absolute inset-0 bg-gradient-to-br ${tile.bg} border border-white/25 ${
+                        prefersReducedMotion && isRevealed ? 'opacity-0' : 'opacity-100'
+                      } transition-opacity duration-200`}
+                    />
+
+                    {/* Back: Seamless Quadrant of Portrait */}
+                    <div
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        transform: prefersReducedMotion ? 'none' : 'rotateY(180deg)',
+                      }}
+                      className="absolute inset-0 overflow-hidden bg-[#E2E8F0]"
+                    >
+                      <div className={`absolute w-[200%] h-[200%] ${tile.offsetClass}`}>
+                        <img
+                          src="/profile.jpg"
+                          alt={tile.id === 'tl' ? 'Husnul Khotimah' : ''}
+                          className="w-full h-full object-cover object-[50%_20%] scale-[1.03]"
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.button>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
-}
+};
+
+export default Hero;

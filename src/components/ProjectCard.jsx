@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { Win98WindowControls } from './RetroStickers';
 
 export default function ProjectCard({
   category,
@@ -9,7 +8,8 @@ export default function ProjectCard({
   description,
   ctaLabel = 'View project',
   preview,
-  stageBg = '#DBEAFE',
+  stageBg = '#F1F5F9',
+  accentColor = '#0078D7',
   onClick,
   delay = 0,
 }) {
@@ -28,49 +28,47 @@ export default function ProjectCard({
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.99 }}
-      transition={{
-        opacity: { duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] },
-        y: { type: 'spring', stiffness: 360, damping: 24 },
-      }}
+      transition={{ duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] }}
       onClick={onClick}
-      className="group win98-window p-1 cursor-pointer text-left flex flex-col"
+      style={{ borderTopColor: accentColor }}
+      className="group bg-white border border-[#CBD5E1] border-t-4 win98-card-3d cursor-pointer text-left flex flex-col justify-between overflow-hidden"
     >
-      {/* Classic Window Title Bar */}
-      <div className="win98-titlebar px-2.5 py-1 flex items-center justify-between gap-2 mb-1">
-        <span className="text-[10.5px] font-mono font-semibold tracking-wide truncate">
+      {/* Top Category Header */}
+      <div className="px-5 pt-4 pb-2 flex items-center justify-between gap-2">
+        <span
+          style={{ color: accentColor }}
+          className="text-[11px] font-mono font-bold uppercase tracking-wider truncate"
+        >
           {category}
         </span>
-        <Win98WindowControls />
       </div>
 
-      {/* Sunken Window Content Area */}
-      <div className="bg-[#FAF8F2] win98-sunken p-4 sm:p-5 flex-1 flex flex-col sm:flex-row items-stretch justify-between gap-4">
-        {/* Left: Copy & Bevel Button */}
-        <div className="flex flex-col justify-between sm:w-[56%]">
-          <div>
-            <h3 className="font-display text-lg font-bold text-[#111827] tracking-tight mb-1.5 group-hover:text-[#000080] transition-colors">
-              {title}
-            </h3>
-            <p className="text-xs sm:text-[13px] text-[#374151] leading-relaxed font-normal mb-4">
-              {description}
-            </p>
-          </div>
+      {/* Full-Width Visual Preview Stage (zero horizontal cramping) */}
+      <div
+        style={{ backgroundColor: stageBg }}
+        className="mx-5 my-2 p-4 min-h-[140px] flex items-center justify-center border border-[#E2E8F0] overflow-hidden"
+      >
+        <div className="w-full flex items-center justify-center">{preview}</div>
+      </div>
 
-          <div className="win98-raised group-hover:bg-[#FEF08A] px-3 py-1 inline-flex items-center gap-1.5 text-xs font-semibold text-[#111827] w-fit transition-colors">
-            {ctaLabel}
-            <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-          </div>
+      {/* Title, Description & Action Label */}
+      <div className="p-5 pt-3 flex-1 flex flex-col justify-between">
+        <div>
+          <h3 className="font-display text-xl font-bold text-[#0F172A] tracking-tight mb-1.5 group-hover:text-[#0078D7] transition-colors">
+            {title}
+          </h3>
+          <p className="text-sm text-[#475569] leading-relaxed font-normal mb-5">
+            {description}
+          </p>
         </div>
 
-        {/* Right: Sunken Preview Stage */}
-        <div
-          style={{ backgroundColor: stageBg }}
-          className="sm:w-[44%] win98-sunken p-3 flex items-center justify-center shrink-0 min-h-[112px]"
+        <span
+          style={{ color: accentColor }}
+          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider"
         >
-          {preview}
-        </div>
+          <span>{ctaLabel}</span>
+          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+        </span>
       </div>
     </motion.div>
   );

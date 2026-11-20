@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Sparkles, RefreshCw, PenTool, CheckCircle2 } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 
-export default function LearningLab({ onOpenFullDemo }) {
+export default function LearningLab({ onOpenFullDemo: _onOpenFullDemo }) {
   // Sentiment demo state
   const sampleSentences = [
     { text: "I loved the event. So glad I joined!", sentiment: "Leaning positive", color: "text-emerald-700 bg-emerald-50 border-emerald-200" },

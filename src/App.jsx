@@ -7,14 +7,27 @@ import SoftwareProjects from './components/SoftwareProjects';
 import BeyondTheScreen from './components/BeyondTheScreen';
 import Footer from './components/Footer';
 import InteractiveModal from './components/InteractiveModal';
+import Win8BootScreen from './components/Win8BootScreen';
 import MLProjectsPage from './pages/MLProjectsPage';
 import MLDetailPage from './pages/MLDetailPage';
 import SoftwareDetailPage from './pages/SoftwareDetailPage';
 import ActivitiesPage from './pages/ActivitiesPage';
+import { softwareProjectsData } from './data/projectsData';
+
+const LEGACY_SOFTWARE_IDS = new Set([
+  'study-space',
+  'studyspace',
+  'campus-pocket',
+  'campuspocket',
+]);
+
+const isSoftwareProjectId = (id) =>
+  softwareProjectsData.some((project) => project.id === id) ||
+  LEGACY_SOFTWARE_IDS.has(id);
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'projects' | 'ml-detail' | 'software-detail' | 'activities'
-  const [activeProjectId, setActiveProjectId] = useState('reading-between-the-words');
+  const [activeProjectId, setActiveProjectId] = useState('fraud-detection');
   const [projectsTab, setProjectsTab] = useState('ml'); // 'ml' | 'software'
 
   const [modalState, setModalState] = useState({
@@ -30,15 +43,7 @@ export default function App() {
       if (hash.startsWith('#/project/')) {
         const id = hash.replace('#/project/', '');
         setActiveProjectId(id);
-        if (
-          id === 'unravel' ||
-          id === 'ufee' ||
-          id === 'hijaukita' ||
-          id === 'study-space' ||
-          id === 'studyspace' ||
-          id === 'campus-pocket' ||
-          id === 'campuspocket'
-        ) {
+        if (isSoftwareProjectId(id)) {
           setCurrentPage('software-detail');
         } else {
           setCurrentPage('ml-detail');
@@ -86,15 +91,7 @@ export default function App() {
   const navigateToProjectDetail = (projectId) => {
     setActiveProjectId(projectId);
     window.location.hash = `/project/${projectId}`;
-    if (
-      projectId === 'unravel' ||
-      projectId === 'ufee' ||
-      projectId === 'hijaukita' ||
-      projectId === 'study-space' ||
-      projectId === 'studyspace' ||
-      projectId === 'campus-pocket' ||
-      projectId === 'campuspocket'
-    ) {
+    if (isSoftwareProjectId(projectId)) {
       setCurrentPage('software-detail');
     } else {
       setCurrentPage('ml-detail');
@@ -141,8 +138,9 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-[#008080] text-[#111827] font-sans selection:bg-[#000080] selection:text-white flex flex-col pb-12">
-        {/* Global Iconic Floating Navbar */}
+      <Win8BootScreen />
+      <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-sans selection:bg-[#0078D7] selection:text-white flex flex-col">
+        {/* Global Sticky Metro Editorial Navbar */}
         <Navbar
           onOpenContact={openContact}
           currentPage={currentPage}

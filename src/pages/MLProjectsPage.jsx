@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
-import { Win98WindowControls, PixelFolderIcon } from '../components/RetroStickers';
+import Button from '../components/Button';
 import { mlProjectsData, softwareProjectsData } from '../data/projectsData';
 
 export default function MLProjectsPage({
@@ -12,162 +12,173 @@ export default function MLProjectsPage({
 }) {
   const [activeTab, setActiveTab] = useState(initialTab); // 'ml' | 'software'
 
+  const [featuredML, ...otherML] = mlProjectsData;
+
   return (
-    <main className="max-w-5xl mx-auto px-6 sm:px-10 pt-10 sm:pt-14 pb-20 relative">
-      {/* Back button */}
+    <main className="max-w-6xl mx-auto px-6 sm:px-10 pt-8 sm:pt-12 pb-20 relative">
+      {/* Top Bar: Back + Tactile Category Switcher */}
       <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.3 }}
-        className="mb-8 flex justify-center sm:justify-start relative z-10"
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25 }}
+        className="flex flex-wrap items-center justify-between gap-4 mb-8"
       >
-        <button
-          onClick={onBackToHome}
-          className="win98-raised inline-flex items-center gap-1.5 text-xs font-bold text-[#111827] px-3 py-1.5 cursor-pointer group"
-        >
+        <Button onClick={onBackToHome} className="group">
           <ArrowLeft size={13} className="group-hover:-translate-x-0.5 transition-transform" />
           Back to home
-        </button>
+        </Button>
+
+        <div className="win98-window p-1 inline-flex items-center gap-1" role="tablist" aria-label="Project categories">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'ml'}
+            onClick={() => setActiveTab('ml')}
+            className={`px-4 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
+              activeTab === 'ml'
+                ? 'bg-[#0078D7] text-white'
+                : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9]'
+            }`}
+          >
+            Machine Learning ({mlProjectsData.length})
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'software'}
+            onClick={() => setActiveTab('software')}
+            className={`px-4 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
+              activeTab === 'software'
+                ? 'bg-[#0078D7] text-white'
+                : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9]'
+            }`}
+          >
+            Software ({softwareProjectsData.length})
+          </button>
+        </div>
       </motion.div>
 
-      {/* Centered Desktop Header */}
+      {/* Editorial Left-Aligned Header */}
       <motion.div
-        initial={{ opacity: 0, y: 14 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="text-center max-w-2xl mx-auto mb-8 relative z-10"
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-2xl mb-10"
       >
-        <div className="inline-flex items-center gap-1.5 bg-[#D4D0C8] win98-raised px-2.5 py-0.5 mb-3">
-          <PixelFolderIcon className="w-3.5 h-3.5" />
-          <span className="text-[11px] font-mono font-bold tracking-wider text-[#000080] uppercase">
-            {activeTab === 'ml' ? 'Projects / Machine Learning' : 'Projects / Software Engineering'}
-          </span>
-        </div>
-        <h1 className="font-display text-3xl sm:text-4xl md:text-[44px] font-bold text-white drop-shadow-[2px_2px_0px_#004040] tracking-tight leading-tight mb-3">
+        <span className="inline-block win98-badge px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase mb-3">
+          {activeTab === 'ml' ? 'Projects / Machine Learning' : 'Projects / Software Engineering'}
+        </span>
+        <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#0F172A] tracking-tight leading-[1.06] mb-3">
           {activeTab === 'ml' ? 'Machine Learning Projects.' : 'Software Engineering Projects.'}
         </h1>
-        <p className="text-sm sm:text-base text-[#E6F4F4] leading-relaxed font-normal">
+        <p className="text-base sm:text-lg text-[#475569] leading-relaxed font-normal">
           {activeTab === 'ml'
-            ? 'Small explorations of language, images, and everyday data. Click any card to try the demo.'
-            : 'Web and mobile applications designed for clarity and everyday use.'}
+            ? 'Interactive models across fraud detection, computer vision, and regression.'
+            : 'Web and mobile applications built for real-world workflows.'}
         </p>
       </motion.div>
 
-      {/* Centered Win98 Filter Toggle */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, delay: 0.06 }}
-        className="flex flex-col items-center gap-3 mb-10 relative z-10"
-      >
-        <div className="win98-window p-1 inline-flex items-center gap-1">
-          <button
-            onClick={() => setActiveTab('ml')}
-            className={`px-5 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
-              activeTab === 'ml'
-                ? 'win98-sunken bg-[#FAF8F2] text-[#000080]'
-                : 'win98-raised text-[#111827] hover:bg-[#E4E0D8]'
-            }`}
+      <AnimatePresence mode="wait">
+        {/* TAB 1: MACHINE LEARNING PROJECTS (Featured Lead + 3-Col Grid) */}
+        {activeTab === 'ml' && (
+          <motion.div
+            key="ml"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-6"
           >
-            Machine learning
-          </button>
-          <button
-            onClick={() => setActiveTab('software')}
-            className={`px-5 py-1.5 text-xs font-bold cursor-pointer transition-colors ${
-              activeTab === 'software'
-                ? 'win98-sunken bg-[#FAF8F2] text-[#000080]'
-                : 'win98-raised text-[#111827] hover:bg-[#E4E0D8]'
-            }`}
+            {featuredML && (
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => onOpenProjectDetail(featuredML.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onOpenProjectDetail(featuredML.id);
+                  }
+                }}
+                className="group bg-white border border-[#CBD5E1] border-t-4 border-t-[#008272] win98-card-3d cursor-pointer text-left"
+              >
+                <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)] gap-6 items-center">
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="bg-[#008272] text-white px-2.5 py-0.5 text-[11px] font-mono font-bold uppercase tracking-wider">
+                        Featured · {featuredML.category}
+                      </span>
+                      <span className="win98-tag px-2.5 py-0.5 text-[11px] font-mono font-semibold">
+                        24 signals · 93% risk threshold
+                      </span>
+                    </div>
+                    <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#0078D7] transition-colors">
+                      {featuredML.title}
+                    </h2>
+                    <p className="text-sm sm:text-base text-[#475569] leading-relaxed max-w-xl">
+                      {featuredML.description}
+                    </p>
+                    <Button as="span" variant="primary" className="w-fit">
+                      Open live demo
+                      <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                    </Button>
+                  </div>
+
+                  <div
+                    style={{ backgroundColor: featuredML.stageBg }}
+                    className="p-6 flex items-center justify-center min-h-[168px] border border-[#E2E8F0]"
+                  >
+                    <div className="w-full max-w-xs">{featuredML.preview}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {otherML.map((project, idx) => (
+                <ProjectCard
+                  key={project.id}
+                  category={project.category}
+                  title={project.title}
+                  description={project.description}
+                  ctaLabel={project.ctaLabel}
+                  preview={project.preview}
+                  stageBg={project.stageBg}
+                  accentColor="#008272"
+                  delay={idx * 0.04}
+                  onClick={() => onOpenProjectDetail(project.id)}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* TAB 2: SOFTWARE PROJECTS */}
+        {activeTab === 'software' && (
+          <motion.div
+            key="software"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            Software
-          </button>
-        </div>
-
-        <span className="text-xs text-[#E6F4F4] font-mono">
-          Click any card to open the project details
-        </span>
-      </motion.div>
-
-      {/* TAB 1: MACHINE LEARNING PROJECTS */}
-      {activeTab === 'ml' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {mlProjectsData.map((project, idx) => (
-            <ProjectCard
-              key={project.id}
-              category={project.category}
-              title={project.title}
-              description={project.description}
-              ctaLabel={project.ctaLabel}
-              preview={project.preview}
-              stageBg={project.stageBg}
-              delay={idx * 0.04}
-              onClick={() => onOpenProjectDetail(project.id)}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* TAB 2: SOFTWARE PROJECTS */}
-      {activeTab === 'software' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {softwareProjectsData.map((project, idx) => (
-            <ProjectCard
-              key={project.id}
-              category={project.category}
-              title={project.title}
-              description={project.description}
-              ctaLabel={project.ctaLabel}
-              preview={project.preview}
-              stageBg={project.stageBg}
-              delay={idx * 0.05}
-              onClick={() => onOpenProjectDetail(project.id)}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Win98 Bottom Switch Window */}
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.4 }}
-        className="win98-window p-1 mt-14"
-      >
-        <div className="win98-titlebar">
-          <div className="flex items-center gap-1.5">
-            <PixelFolderIcon className="w-3.5 h-3.5" />
-            <span className="text-[11px] font-bold tracking-wide">
-              {activeTab === 'ml' ? 'switch_to_software.exe' : 'switch_to_ml.exe'}
-            </span>
-          </div>
-          <Win98WindowControls />
-        </div>
-
-        <div className="win98-sunken bg-[#FAF8F2] p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
-            <span className="text-[10.5px] font-mono font-bold tracking-widest text-[#000080] uppercase block mb-1.5">
-              {activeTab === 'ml' ? 'Alongside the experiments' : 'Explore More'}
-            </span>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight mb-1">
-              {activeTab === 'ml' ? 'A little software, too.' : 'Machine learning experiments.'}
-            </h2>
-            <p className="text-xs sm:text-sm text-[#4B5563] font-normal">
-              {activeTab === 'ml'
-                ? 'Web and mobile apps, built one small problem at a time.'
-                : 'Models and interactive demos across NLP, vision, and regression.'}
-            </p>
-          </div>
-
-          <button
-            onClick={() => setActiveTab(activeTab === 'ml' ? 'software' : 'ml')}
-            className="win98-raised inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#111827] px-5 py-2.5 cursor-pointer self-start sm:self-auto shrink-0"
-          >
-            {activeTab === 'ml' ? 'Explore software projects' : 'Explore ML projects'}
-            <ArrowRight size={15} />
-          </button>
-        </div>
-      </motion.div>
+            {softwareProjectsData.map((project, idx) => (
+              <ProjectCard
+                key={project.id}
+                category={project.category}
+                title={project.title}
+                description={project.description}
+                ctaLabel={project.ctaLabel}
+                preview={project.preview}
+                stageBg={project.stageBg}
+                delay={idx * 0.05}
+                onClick={() => onOpenProjectDetail(project.id)}
+              />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

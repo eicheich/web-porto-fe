@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Send, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import Button from './Button';
 
 export default function InteractiveModal({ isOpen, mode, onClose, initialData }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', topic: 'ML Experiment' });
@@ -101,7 +102,7 @@ export default function InteractiveModal({ isOpen, mode, onClose, initialData })
       >
         <div className="win98-titlebar shrink-0">
           <span className="text-[11px] font-bold tracking-wide">
-            {mode === 'contact' ? 'contact.exe — Send a message' : mode === 'story' ? 'story.txt — Case Study' : 'model_demo.exe'}
+            {mode === 'contact' ? 'Send a Message' : mode === 'story' ? 'Case Study' : 'Interactive Demo'}
           </span>
           <button
             ref={closeButtonRef}
@@ -194,13 +195,13 @@ export default function InteractiveModal({ isOpen, mode, onClose, initialData })
                     />
                   </div>
 
-                  <button
+                  <Button
                     type="submit"
-                    className="win98-raised w-full py-2.5 text-[#111827] font-bold text-sm flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full"
                   >
                     Send message
                     <Send size={14} className="text-[#000080]" />
-                  </button>
+                  </Button>
                 </form>
               </>
             ) : (
@@ -214,12 +215,11 @@ export default function InteractiveModal({ isOpen, mode, onClose, initialData })
                 <p className="text-xs text-[#4B5563] max-w-xs mx-auto mb-6">
                   Your message has been received. I'll get back to you shortly at {formData.email || 'your email'}.
                 </p>
-                <button
+                <Button
                   onClick={onClose}
-                  className="win98-raised px-6 py-2 text-[#111827] text-xs font-bold cursor-pointer"
                 >
                   Close
-                </button>
+                </Button>
               </div>
             )}
           </div>
@@ -315,22 +315,18 @@ export default function InteractiveModal({ isOpen, mode, onClose, initialData })
                   </div>
 
                   <div className="flex justify-center gap-3 mb-5">
-                    <button
+                    <Button
                       onClick={() => setSelectedPet('cat')}
-                      className={`px-4 py-1.5 rounded-full text-xs font-medium cursor-pointer transition ${
-                        selectedPet === 'cat' ? 'bg-[#2D6E7E] text-white' : 'bg-white border border-[#1F2A2E]/12'
-                      }`}
+                      aria-pressed={selectedPet === 'cat'}
                     >
                       Test Cat Image
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       onClick={() => setSelectedPet('dog')}
-                      className={`px-4 py-1.5 rounded-full text-xs font-medium cursor-pointer transition ${
-                        selectedPet === 'dog' ? 'bg-[#2D6E7E] text-white' : 'bg-white border border-[#1F2A2E]/12'
-                      }`}
+                      aria-pressed={selectedPet === 'dog'}
                     >
                       Test Dog Image
-                    </button>
+                    </Button>
                   </div>
 
                   <div className="p-3 bg-white rounded-xl border border-[#1F2A2E]/10 inline-block text-left min-w-[200px]">
@@ -387,7 +383,7 @@ export default function InteractiveModal({ isOpen, mode, onClose, initialData })
                   Interactive Experiment
                 </span>
                 <h3 id="modal-heading" className="font-display text-2xl font-bold text-[#1F2A2E] tracking-tight mb-1">
-                  {initialData === 'sentiment' ? 'Reading Between the Words' : initialData === 'digits' ? 'What Does a Seven Look Like?' : 'Patterns Hiding in Plain Sight'}
+                  {initialData === 'sentiment' ? 'Reading Between the Words' : initialData === 'digits' ? 'Handwritten Digit Recognizer' : 'Patterns Hiding in Plain Sight'}
                 </h3>
                 <p className="text-xs text-[#465359] mb-6">
                   {initialData === 'sentiment'
@@ -456,12 +452,12 @@ export default function InteractiveModal({ isOpen, mode, onClose, initialData })
               </div>
             )}
 
-            <button
+            <Button
               onClick={onClose}
-              className="mt-6 w-full py-2.5 bg-[#1F2A2E] text-[#FFFDF8] rounded-full text-xs font-medium hover:bg-[#2D6E7E] transition cursor-pointer"
+              className="mt-6 w-full"
             >
               Close
-            </button>
+            </Button>
           </div>
         )}
 
@@ -500,12 +496,12 @@ export default function InteractiveModal({ isOpen, mode, onClose, initialData })
               </div>
             </div>
 
-            <button
+            <Button
               onClick={onClose}
-              className="win98-raised mt-6 w-full py-2 text-[#111827] text-xs font-bold cursor-pointer"
+              className="mt-6 w-full"
             >
               Back to portfolio
-            </button>
+            </Button>
           </div>
         )}
         </div>

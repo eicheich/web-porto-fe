@@ -2,74 +2,74 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function Footer({ onOpenContact }) {
+  const linkClass =
+    'bg-[#1E293B] border border-[#334155] hover:bg-[#0078D7] hover:border-[#0078D7] text-white px-4 py-3 flex items-center justify-between text-xs font-bold transition-colors cursor-pointer';
+
   return (
-    <footer className="bg-[#D4D0C8] border-t-2 border-white py-10 px-6 sm:px-10 text-xs text-[#374151]">
-      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        {/* Left */}
-        <div className="font-display font-bold text-[#111827] text-base">
-          Husnul Khotimah<span className="text-[#000080]">.</span>
+    <footer className="bg-[#0F172A] text-white border-t border-[#1E293B] py-12 px-6 sm:px-10 text-xs">
+      <div className="max-w-6xl mx-auto space-y-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#1E293B] pb-5">
+          <div>
+            <div className="font-display font-bold text-white text-lg tracking-tight">
+              Husnul Khotimah<span className="text-[#0078D7]">.</span>
+            </div>
+            <p className="text-xs text-[#94A3B8] mt-1">
+              Software Engineering · IPB University · Bogor, Indonesia
+            </p>
+          </div>
+          <span className="bg-[#1E293B] border border-[#334155] px-3 py-1 font-mono text-[11px] font-semibold text-[#E2E8F0]">
+            Open to Internship &amp; Full-Time Roles
+          </span>
         </div>
 
-        {/* Center Raised Bevel Links */}
-        <div className="flex flex-wrap items-center justify-center gap-2 font-medium text-[#111827]">
+        <nav aria-label="Contact and social links" className="grid grid-cols-1 min-[380px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2.5">
           {onOpenContact && (
-            <button
-              onClick={onOpenContact}
-              className="win98-raised hover:bg-[#FEF08A] px-3 py-1 inline-flex items-center gap-1 font-semibold cursor-pointer transition-colors"
-            >
-              Let's connect
-              <ArrowUpRight size={13} />
+            <button type="button" onClick={onOpenContact} className={linkClass}>
+              <span>Let's connect</span>
+              <ArrowUpRight size={14} aria-hidden="true" />
             </button>
           )}
-          <a
-            href="mailto:husnulkhotimah@houselab.my.id"
-            className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
-          >
-            Email
-            <ArrowUpRight size={13} />
+          <a href="mailto:husnulkhotimah@houselab.my.id" className={linkClass}>
+            <span>Email</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
           <a
             href="https://www.linkedin.com/in/husnul-khotimah-8b953b248"
             target="_blank"
             rel="noopener noreferrer"
-            className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
+            className={linkClass}
           >
-            LinkedIn
-            <ArrowUpRight size={13} />
+            <span>LinkedIn</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
           <a
             href="https://github.com/eicheich"
             target="_blank"
             rel="noopener noreferrer"
-            className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
+            className={linkClass}
           >
-            GitHub
-            <ArrowUpRight size={13} />
+            <span>GitHub</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
           <a
             href="https://huggingface.co/unalivehooman"
             target="_blank"
             rel="noopener noreferrer"
-            className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
+            className={linkClass}
           >
-            Hugging Face
-            <ArrowUpRight size={13} />
+            <span>Hugging Face</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
           <a
             href="https://www.kaggle.com/unalivehooman"
             target="_blank"
             rel="noopener noreferrer"
-            className="win98-raised hover:bg-[#EAE8E1] px-3 py-1 inline-flex items-center gap-1 transition-colors"
+            className={linkClass}
           >
-            Kaggle
-            <ArrowUpRight size={13} />
+            <span>Kaggle</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
-        </div>
-
-        {/* Right Sunken Status Pill */}
-        <div className="win98-sunken bg-[#DFDCD4] px-3 py-1 text-[11px] font-mono text-[#111827]">
-          IPB University · 2026
-        </div>
+        </nav>
       </div>
     </footer>
   );
